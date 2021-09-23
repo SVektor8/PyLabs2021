@@ -86,6 +86,4 @@ def ex14(n):
     s *= n
     go(s.split())
 
-ex14(5)
-
 input()
