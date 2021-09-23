@@ -1,16 +1,5 @@
-import turtle as trt
-from math import sin, cos
+a = 179
+b = 197
+c = (a ** 2 + b ** 2) ** 0.5
 
-def go(args):
-    for i in range(len(args)):
-        if i % 2 == 0:
-            trt.left(int(args[i]))
-        else:
-            trt.forward(int(args[i]))
-
-def ex2():
-    go([0, 50, 90, 50, 90, 50, 90, 50, 90, 50])
-
-ex2()
-
-input()
+print(c)
