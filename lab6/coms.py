@@ -102,6 +102,7 @@ class Game:
     score = 0
     highscore = -1
     MaxspeedChanging = 0
+    username = 'admin'
 
     def __init__(self, Maxspeed, Xmax, Ymax, Quantity, radius,
                  FPS = 90, WIDTH = 1100, HEIGHT = 700):
@@ -130,7 +131,7 @@ class Game:
     def restart(self):
         '''
         Launching a new game in the session by making new balls' positions,
-        updating highscore
+        updating highscore and all-time highscore
         '''
         self.Walls = []
         self.pool = []
@@ -154,6 +155,11 @@ class Game:
         self.Walls.append(Wall(-self.Xmax, self.Ymax,
                           self.Xmax, self.Ymax,
                           0))  # top wall
+
+        if int(open('data.txt', 'r').read().split()[0]) < self.highscore:
+            with open('data.txt', 'w') as f:
+                f.write(str(int(self.highscore)) + ' by ' + self.username)
+        
 
     def update(self):
         '''

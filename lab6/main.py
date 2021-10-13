@@ -6,14 +6,16 @@ from Colors import *
 #Parameters of the screen and the "Box" -- zone, where the game is launched
 #Xmax, Ymax -- maximal coordinats if the system, which (0, 0) is in the center
 #of the "Box"
+#game length -- time length of one game (in seconds)
 
-FPS = 90
+FPS = 60
 WIDTH = 1100  
 HEIGHT = 700  
 BoxWIDTH = WIDTH // 2  
 BoxHEIGHT = HEIGHT  
 Xmax = BoxWIDTH / 2
 Ymax = BoxHEIGHT / 2
+game_length = 15
 
 #Default parameters of the balls
 
@@ -24,7 +26,7 @@ radius = 10
 # Initialisation of the screen (sc), pygame clock and variable that counts
 # iterations (time)
 
-time = 0
+time = game_length * FPS
 
 pygame.init()
 sc = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -37,7 +39,11 @@ GG = Game(Maxspeed, Xmax, Ymax, Quantity, radius, FPS, WIDTH, HEIGHT)
 while 1:
     sc.fill(GRAY())
 
-    time += 1
+    if time <= 0:
+        time = game_length * FPS
+        GG.restart()
+
+    time -= 1
 
     #Writing necessary signs in thye left part of the game window
 
@@ -45,17 +51,28 @@ while 1:
                                                    True, YELLOW())
     sc.blit(ScoreText, (10, 50))
 
-    HighScoreText = pygame.font.Font(None, 72).render('Highcore: ' + str(int(GG.highscore)),
+    HighScoreText = pygame.font.Font(None, 72).render('Highcore: '
+                                                      + str(int(GG.highscore)),
                                                    True, OLIVE())
     sc.blit(HighScoreText, (10, 200))
+
+    AllTimeHighScoreText = pygame.font.Font(None, 36).render('All-time Highcore: '
+                                                      + open('data.txt', 'r').read(),
+                                                             True, OLIVE())
+    sc.blit(AllTimeHighScoreText, (120, 20))
     
-    SpeedText = pygame.font.Font(None, 72).render('Balls speed: ' + str(int(GG.Maxspeed*20)),
+    SpeedText = pygame.font.Font(None, 72).render('Balls speed: '
+                                                  + str(int(GG.Maxspeed*20)),
                                                    True, WHITE())
     sc.blit(SpeedText, (10, 350))
 
-    RadiusText = pygame.font.Font(None, 96).render('Balls radius: ' + str(GG.radius),
+    RadiusText = pygame.font.Font(None, 96).render('Balls radius: '
+                                                   + str(GG.radius),
                                                    True, WHITE())
     sc.blit(RadiusText, (10, 500))
+
+    TimeText = pygame.font.Font(None, 72).render(str(time//FPS), True, RED())
+    sc.blit(TimeText, (10, 10))
 
     #Drawing the balls and the walls
 
