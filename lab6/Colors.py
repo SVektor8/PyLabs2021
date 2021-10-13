@@ -1,7 +1,5 @@
-'''
-Module with different colors, every function returns a turple of three numbers
-(<RED>, <GREEN>, <BLUE>), which is the RGB-code of the color
-'''
+#Module with different colors, every function returns a turple of three numbers
+#(<RED>, <GREEN>, <BLUE>), which is the RGB-code of the color
 
 def DARKKHAKI():
     return (189, 183, 107)
