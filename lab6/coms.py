@@ -2,6 +2,7 @@ from random import randrange
 from math import sqrt, radians, sin, cos
 import pygame
 from GraphComs import trans, distance
+from Colors import YELLOW, OLIVE, WHITE, GRAY, RED, KINOVAR, BLACK
 
 
 class Ball:
@@ -105,7 +106,7 @@ class Game:
     username = 'admin'
 
     def __init__(self, Maxspeed, Xmax, Ymax, Quantity, radius,
-                 FPS = 90, WIDTH = 1100, HEIGHT = 700):
+                 FPS = 90, WIDTH = 1100, HEIGHT = 700, game_length = 15):
         '''
         Defining start parameters of the session:
 
@@ -125,6 +126,10 @@ class Game:
         self.Ymax = Ymax
         self.Quantity = Quantity
         self.radius = radius
+        self.game_length = game_length
+
+        self.time = game_length * FPS
+        self.sc = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         
         self.restart()  # Refreshing session's data
 
@@ -166,6 +171,14 @@ class Game:
         Updates position of the balls, checks collisions, changes the speed of
         the balls
         '''
+        if self.time <= 0:
+            self.time = self.game_length * self.FPS
+            self.restart()
+
+        self.time -= 1
+
+        self.draw()
+        
         for i in self.pool:
 
             for j in self.Walls:
@@ -185,6 +198,9 @@ class Game:
             for i in self.pool:
                 i.speedx *= self.Maxspeed/OldMaxspeed
                 i.speedy *= self.Maxspeed/OldMaxspeed
+
+        for i in pygame.event.get():
+            self.get_event(i)
         
     def get_event(self, event):
         '''
@@ -225,4 +241,49 @@ class Game:
                         self.pool[i] = Ball(self.Maxspeed,
                                             self.Xmax, self.Ymax,
                                             -self.Xmax, -self.Ymax)
+                        
+    def draw(self):
+        self.sc.fill(GRAY())
+
+        #Writing necessary signs in thye left part of the game window
+
+        ScoreText = pygame.font.Font(None, 128).render('Score: ' + str(int(self.score)),
+                                                       True, YELLOW())
+        self.sc.blit(ScoreText, (10, 50))
+
+        HighScoreText = pygame.font.Font(None, 72).render('Highcore: '
+                                                          + str(int(self.highscore)),
+                                                       True, OLIVE())
+        self.sc.blit(HighScoreText, (10, 200))
+
+        AllTimeHighScoreText = pygame.font.Font(None, 36).render('All-time Highcore: '
+                                                          + open('data.txt', 'r').read(),
+                                                                 True, OLIVE())
+        self.sc.blit(AllTimeHighScoreText, (120, 20))
         
+        SpeedText = pygame.font.Font(None, 72).render('Balls speed: '
+                                                      + str(int(self.Maxspeed*20)),
+                                                       True, WHITE())
+        self.sc.blit(SpeedText, (10, 350))
+
+        RadiusText = pygame.font.Font(None, 96).render('Balls radius: '
+                                                       + str(self.radius),
+                                                       True, WHITE())
+        self.sc.blit(RadiusText, (10, 500))
+
+        TimeText = pygame.font.Font(None, 72).render(str(self.time//self.FPS),
+                                                     True, RED())
+        self.sc.blit(TimeText, (10, 10))
+
+        #Drawing the balls and the walls
+
+        for i in self.pool:
+            pygame.draw.circle(self.sc, KINOVAR(), (trans(self.HEIGHT, self.WIDTH,
+                                                     self.BoxHEIGHT, self.BoxWIDTH,
+                                                     [i.x, i.y])), self.radius)
+
+        for i in self.Walls:
+            Coordins = [trans(self.HEIGHT, self.WIDTH,
+                              self.BoxHEIGHT, self.BoxWIDTH, j)
+                        for j in i.coords()]
+            pygame.draw.line(self.sc, BLACK(), Coordins[0], Coordins[1])
