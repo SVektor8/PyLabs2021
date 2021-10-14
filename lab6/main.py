@@ -1,7 +1,7 @@
 import pygame
-from coms import *
-from GraphComs import *
-from Colors import *
+from coms import Ball, Wall, Game
+from GraphComs import trans
+from Colors import YELLOW, OLIVE, WHITE, GRAY, RED, KINOVAR, BLACK
 
 #Parameters of the screen and the "Box" -- zone, where the game is launched
 #Xmax, Ymax -- maximal coordinats if the system, which (0, 0) is in the center

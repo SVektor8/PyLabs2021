@@ -1,7 +1,7 @@
 from random import randrange
 from math import sqrt, radians, sin, cos
 import pygame
-from GraphComs import *
+from GraphComs import trans, distance
 
 
 class Ball:
