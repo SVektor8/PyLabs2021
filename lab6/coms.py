@@ -2,7 +2,9 @@ from random import randrange
 from math import sqrt, radians, sin, cos
 import pygame
 from GraphComs import trans, distance
-from Colors import YELLOW, OLIVE, WHITE, GRAY, RED, KINOVAR, BLACK
+from Colors import YELLOW, OLIVE, WHITE, GRAY, RED, KINOVAR, BLACK, BERLIN_LAZUR
+from Colors import SKYBLUE
+import yaml
 
 
 class Ball:
@@ -102,6 +104,9 @@ class Game:
     username -- name of current player to be written in the all-time highscore
         line. In the current moment cannot be changed by user, it is a
         preparation for a future feature
+    logged -- bool variable marking if it is game mode or username changing mode
+    database_path -- file, where is the list wuth current players and their score
+    data_path -- file with all-time highscore
     '''
     Walls = []
     pool = []
@@ -110,6 +115,8 @@ class Game:
     MaxspeedChanging = 0
     username = 'admin'
     logged = False
+    database_path = 'database.txt'
+    data_path = 'data.txt'
 
     def __init__(self, Maxspeed, Xmax, Ymax, Quantity, radius,
                  FPS = 90, WIDTH = 1100, HEIGHT = 700, game_length = 15):
@@ -141,7 +148,7 @@ class Game:
         self.time = game_length * FPS
         self.sc = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
 
-        self.login()
+        self.login()  # taking user's name
         self.restart()  # Refreshing session's data
 
     def restart(self):
@@ -153,6 +160,8 @@ class Game:
         self.pool = []
         self.highscore = max(self.highscore, self.score)
         self.score = 0
+
+        self.write_stats()
 
         # Defining balls
         
@@ -178,8 +187,8 @@ class Game:
 
         # Updating all-time highscore
         
-        if int(open('data.txt', 'r').read().split()[0]) < self.highscore:
-            with open('data.txt', 'w') as f:
+        if int(open(self.data_path, 'r').read().split()[0]) < self.highscore:
+            with open(self.data_path, 'w') as f:
                 f.write(str(int(self.highscore)) + ' by ' + self.username)
         
 
@@ -222,7 +231,7 @@ class Game:
         '''
         Works with events
         '''
-        if self.logged:
+        if self.logged:  # game mode
             if event.type == pygame.QUIT:
                 exit()  # Quits
             elif event.type == pygame.KEYDOWN:
@@ -258,18 +267,20 @@ class Game:
                             self.pool[i] = Ball(self.Maxspeed,
                                                 self.Xmax, self.Ymax,
                                                 -self.Xmax, -self.Ymax)
-        else:
+                            
+        else:  # mode of changing the username
             if event.type == pygame.QUIT:
                 exit()  # Quits
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_BACKSPACE:
+                if event.key == pygame.K_BACKSPACE:  # deletes last symbol
                     self.username = self.username[:-1]
-                elif event.key == 13:  # Enter button
+                elif event.key == 13:  # Enter button, to go to game mode
                     self.logged = True
-                elif 97 <= event.key <= 122:
+                    
+                elif 97 <= event.key <= 122:  # typing a letter
                     letters = 'abcdefghijklmnopqrstuvwxyz'
                     self.username += letters[event.key - 97]
-                elif 48 <= event.key <= 57:
+                elif 48 <= event.key <= 57:  # typing a digit
                     self.username += str(event.key - 48)
                         
     def draw(self):
@@ -288,34 +299,52 @@ class Game:
         HighScoreText = pygame.font.Font(None, 72).render('Highcore: '
                                                           + str(int(self.highscore)),
                                                        True, OLIVE())
-        self.sc.blit(HighScoreText, (10, 200))
+        self.sc.blit(HighScoreText, (10, 150))
 
         AllTimeHighScoreText = pygame.font.Font(None, 36).render('All-time Highcore: '
-                                                          + open('data.txt', 'r').read(),
+                                                          + open(self.data_path,
+                                                                 'r').read(),
                                                                  True, OLIVE())
         self.sc.blit(AllTimeHighScoreText, (120, 20))
         
         SpeedText = pygame.font.Font(None, 72).render('Balls speed: '
                                                       + str(int(self.Maxspeed*20)),
                                                        True, WHITE())
-        self.sc.blit(SpeedText, (10, 350))
+        self.sc.blit(SpeedText, (10, 220))
 
         ChangeSpeedText = pygame.font.Font(None, 36).render('To change use W and S buttons',
                                                       True, WHITE())
-        self.sc.blit(ChangeSpeedText, (10, 405))
+        self.sc.blit(ChangeSpeedText, (10, 275))
 
         RadiusText = pygame.font.Font(None, 96).render('Balls radius: '
                                                        + str(self.radius),
                                                        True, WHITE())
-        self.sc.blit(RadiusText, (10, 500))
+        self.sc.blit(RadiusText, (10, 315))
 
         ChangeRadiusText = pygame.font.Font(None, 36).render('To change use UP and DOWN arrows',
                                                        True, WHITE())
-        self.sc.blit(ChangeRadiusText, (10, 571))
+        self.sc.blit(ChangeRadiusText, (10, 386))
 
         TimeText = pygame.font.Font(None, 72).render(str(self.time//self.FPS),
                                                      True, RED())
         self.sc.blit(TimeText, (10, 10))
+
+        RatingText = pygame.font.Font(None, 24).render('Rating list: ',
+                                                       True, SKYBLUE())
+        self.sc.blit(RatingText, (10, 420))
+
+        # Writing rating list
+
+        with open(self.database_path, 'r') as f:  # reading data
+            loaded = [i.split() for i in f.read().splitlines()]
+        del loaded[0]
+        loaded = sorted(loaded, key = lambda x: x[1], reverse = True) #sorting data
+
+        for i, string in enumerate(loaded):  # writing each rank
+            Text = pygame.font.Font(None, 24).render(str(i + 1) + '. ' + string[0] +
+                                                     ' ' + string[1],
+                                                           True, BERLIN_LAZUR())
+            self.sc.blit(Text, (10, 440 + i * 20))
 
         #Drawing the balls and the walls
 
@@ -331,10 +360,13 @@ class Game:
             pygame.draw.line(self.sc, BLACK(), Coordins[0], Coordins[1])
 
     def login(self):
+        '''
+        Takes user's nickname which he types by keyboard
+        '''
 
-        while not self.logged:
+        while not self.logged:  # waiting for typing the nickname
             self.sc.fill(GRAY())
-
+            
             LogText = pygame.font.Font(None, 72).render('Enter your name: '
                                                         + self.username,
                                                          True, WHITE())
@@ -345,3 +377,27 @@ class Game:
                 self.get_event(i)
 
             pygame.display.update()
+
+    def write_stats(self):
+        '''
+        Updates users' statistics
+        '''
+        is_new = True
+        
+        with open(self.database_path, 'r') as f:  # reading old statistics
+            loaded = [i.split() for i in f.read().splitlines()]
+
+        for i in range(len(loaded)):  # adding new data
+            if loaded[i][0] == self.username and i != 0:
+                loaded[i][1] = str(max(int(loaded[i][1]), int(self.highscore)))
+                is_new = False
+                break
+
+        if is_new:  # if user is new, adding him
+            loaded.append([self.username, str(int(self.highscore))])
+            
+        with open(self.database_path, 'w') as f:  # loading statistics to the file
+            for i in loaded:
+                for j in i:
+                    f.write(j + ' ')
+                f.write('\n')
