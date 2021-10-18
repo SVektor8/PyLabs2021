@@ -23,23 +23,22 @@ Quantity = 10
 Maxspeed = 1
 radius = 10
 
-# Initialisation of the screen (sc), pygame clock and variable that counts
-# iterations (time)
+# Initialisation of the screen (sc) and pygame clock
 
 pygame.init()
 clock = pygame.time.Clock()
 
 #GG is the Game object, which has all the information about the current game
 
-GG = Game(Maxspeed, Xmax, Ymax, Quantity, radius, FPS, WIDTH, HEIGHT, game_length)
+GG = Game(Maxspeed, Xmax, Ymax, Quantity, radius,
+          FPS, WIDTH, HEIGHT, game_length)
 
 while 1:
 
-    #Updating display and positions of the balls
+    #Updating display and the game situation
+    
     GG.update()
     
     pygame.display.update()
-    
-    #Catching events and working with them
 
     clock.tick(FPS)

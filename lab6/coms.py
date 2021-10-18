@@ -27,6 +27,7 @@ class Ball:
 
         self.speedx = randrange(int(speedmax * 2 * 100 + 1)) / 100 - speedmax
         self.speedy = randrange(-1, 2, 2) * sqrt(speedmax ** 2 - self.speedx ** 2)
+        
         self.x = randrange(int((xmax - xmin - speedmax) * 100)) / 100 + xmin + speedmax/2
         self.y = randrange(int((ymax - ymin - speedmax) * 100)) / 100 + ymin + speedmax/2
         
@@ -89,7 +90,8 @@ class Wall:
 
 class Game:
     '''
-    Class that has all parameters of current game session in it
+    Class that has all parameters of current game session in it.
+    It manages the game, makes the window. where it is launched and draws actions
 
     Walls -- list with all consisting walls of Wall class in it
     pool -- list with all consisting ball of Ball class in it
@@ -97,6 +99,9 @@ class Game:
     highscore -- the highest score in the current session
     MaxspeedChanging -- variable that can be -1, 0, 1 and helps to control the
         speed of the balls in the pool
+    username -- name of current player to be written in the all-time highscore
+        line. In the current moment cannot be changed by user, it is a
+        preparation for a future feature
     '''
     Walls = []
     pool = []
@@ -115,6 +120,10 @@ class Game:
         Maxspeed -- speed of the balls
         Xmax, Ymax -- maximal module of the coordinates of the balls
         Quantity, radius -- balls' parameters
+        game_length -- time length of one game (in seconds)
+        time -- game's personal clock; how many frames is remaining before new
+            round will start
+        sc -- screen, where everything is happening
         '''
         self.BoxWIDTH = WIDTH // 2
         self.BoxHEIGHT = HEIGHT
@@ -143,10 +152,14 @@ class Game:
         self.highscore = max(self.highscore, self.score)
         self.score = 0
 
+        # Defining balls
+        
         for i in range(self.Quantity):
             self.pool.append(Ball(self.Maxspeed,
                                   self.Xmax, self.Ymax,
                                   -self.Xmax, -self.Ymax))
+
+        # Defining walls
         
         self.Walls.append(Wall(self.Xmax, self.Ymax,
                           self.Xmax, -self.Ymax,
@@ -161,6 +174,8 @@ class Game:
                           self.Xmax, self.Ymax,
                           0))  # top wall
 
+        # Updating all-time highscore
+        
         if int(open('data.txt', 'r').read().split()[0]) < self.highscore:
             with open('data.txt', 'w') as f:
                 f.write(str(int(self.highscore)) + ' by ' + self.username)
@@ -168,18 +183,17 @@ class Game:
 
     def update(self):
         '''
-        Updates position of the balls, checks collisions, changes the speed of
-        the balls
+        Updating situation and parameters
         '''
-        if self.time <= 0:
+        if self.time <= 0:  # checks if current round is finished
             self.time = self.game_length * self.FPS
             self.restart()
 
         self.time -= 1
 
-        self.draw()
+        self.draw()  # draws all on the screen
         
-        for i in self.pool:
+        for i in self.pool:  # updates balls' positions and checks collisions
 
             for j in self.Walls:
                 i.try_collision(j)
@@ -188,7 +202,7 @@ class Game:
 
             i.clocktickes()
 
-        if abs(self.MaxspeedChanging):
+        if abs(self.MaxspeedChanging):  # checks if user changed balls' speed
             OldMaxspeed = self.Maxspeed
             
             self.Maxspeed += self.MaxspeedChanging * 0.05
@@ -199,7 +213,7 @@ class Game:
                 i.speedx *= self.Maxspeed/OldMaxspeed
                 i.speedy *= self.Maxspeed/OldMaxspeed
 
-        for i in pygame.event.get():
+        for i in pygame.event.get():  # catches application's events
             self.get_event(i)
         
     def get_event(self, event):
@@ -243,11 +257,15 @@ class Game:
                                             -self.Xmax, -self.Ymax)
                         
     def draw(self):
+        '''
+        Draws all on the screen
+        '''
         self.sc.fill(GRAY())
 
-        #Writing necessary signs in thye left part of the game window
+        #Writing necessary signs in the left part of the game window
 
-        ScoreText = pygame.font.Font(None, 128).render('Score: ' + str(int(self.score)),
+        ScoreText = pygame.font.Font(None, 128).render('Score: '
+                                                       + str(int(self.score)),
                                                        True, YELLOW())
         self.sc.blit(ScoreText, (10, 50))
 
