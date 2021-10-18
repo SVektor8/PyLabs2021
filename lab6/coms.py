@@ -284,10 +284,18 @@ class Game:
                                                        True, WHITE())
         self.sc.blit(SpeedText, (10, 350))
 
+        ChangeSpeedText = pygame.font.Font(None, 36).render('To change use W and S buttons',
+                                                      True, WHITE())
+        self.sc.blit(ChangeSpeedText, (10, 405))
+
         RadiusText = pygame.font.Font(None, 96).render('Balls radius: '
                                                        + str(self.radius),
                                                        True, WHITE())
         self.sc.blit(RadiusText, (10, 500))
+
+        ChangeRadiusText = pygame.font.Font(None, 36).render('To change use UP and DOWN arrows',
+                                                       True, WHITE())
+        self.sc.blit(ChangeRadiusText, (10, 571))
 
         TimeText = pygame.font.Font(None, 72).render(str(self.time//self.FPS),
                                                      True, RED())
