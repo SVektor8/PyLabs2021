@@ -109,6 +109,7 @@ class Game:
     highscore = -1
     MaxspeedChanging = 0
     username = 'admin'
+    logged = False
 
     def __init__(self, Maxspeed, Xmax, Ymax, Quantity, radius,
                  FPS = 90, WIDTH = 1100, HEIGHT = 700, game_length = 15):
@@ -139,7 +140,8 @@ class Game:
 
         self.time = game_length * FPS
         self.sc = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        
+
+        self.login()
         self.restart()  # Refreshing session's data
 
     def restart(self):
@@ -220,41 +222,55 @@ class Game:
         '''
         Works with events
         '''
-        if event.type == pygame.QUIT:
-            exit()  # Quits
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                self.restart()  # Launchs new game
-                
-            elif event.key == pygame.K_UP:
-                self.radius += 1  # Makes balls bigger
-            elif event.key == pygame.K_DOWN:
-                if self.radius >= 2:
-                    self.radius -= 1  # Makes balls smaller, but not with
-                                      # zero radius
-            elif event.key == pygame.K_w:
-                self.MaxspeedChanging = 1  # Makes balls faster
-            elif event.key == pygame.K_s:
-                self.MaxspeedChanging = -1  # Makes balls slower
-                
-        elif event.type == pygame.KEYUP:
-            if event.key in [pygame.K_w, pygame.K_s]:
-                self.MaxspeedChanging = 0  # Stops changing balls' speed
-                
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:  # checks catching a ball
-                position = event.pos
-                
-                for i, ball in enumerate(self.pool):
-                    if distance(position,
-                                trans(self.HEIGHT, self.WIDTH,
-                                      self.BoxHEIGHT, self.BoxWIDTH,
-                                      (ball.x, ball.y))) <= self.radius:
-                        self.score += ((ball.speedx**2 + ball.speedy**2)**0.5
-                                       /self.radius*1000)
-                        self.pool[i] = Ball(self.Maxspeed,
-                                            self.Xmax, self.Ymax,
-                                            -self.Xmax, -self.Ymax)
+        if self.logged:
+            if event.type == pygame.QUIT:
+                exit()  # Quits
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.restart()  # Launchs new game
+                    
+                elif event.key == pygame.K_UP:
+                    self.radius += 1  # Makes balls bigger
+                elif event.key == pygame.K_DOWN:
+                    if self.radius >= 2:
+                        self.radius -= 1  # Makes balls smaller, but not with
+                                          # zero radius
+                elif event.key == pygame.K_w:
+                    self.MaxspeedChanging = 1  # Makes balls faster
+                elif event.key == pygame.K_s:
+                    self.MaxspeedChanging = -1  # Makes balls slower
+                    
+            elif event.type == pygame.KEYUP:
+                if event.key in [pygame.K_w, pygame.K_s]:
+                    self.MaxspeedChanging = 0  # Stops changing balls' speed
+                    
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:  # checks catching a ball
+                    position = event.pos
+                    
+                    for i, ball in enumerate(self.pool):
+                        if distance(position,
+                                    trans(self.HEIGHT, self.WIDTH,
+                                          self.BoxHEIGHT, self.BoxWIDTH,
+                                          (ball.x, ball.y))) <= self.radius:
+                            self.score += ((ball.speedx**2 + ball.speedy**2)**0.5
+                                           /self.radius*1000)
+                            self.pool[i] = Ball(self.Maxspeed,
+                                                self.Xmax, self.Ymax,
+                                                -self.Xmax, -self.Ymax)
+        else:
+            if event.type == pygame.QUIT:
+                exit()  # Quits
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    self.username = self.username[:-1]
+                elif event.key == 13:  # Enter button
+                    self.logged = True
+                elif 97 <= event.key <= 122:
+                    letters = 'abcdefghijklmnopqrstuvwxyz'
+                    self.username += letters[event.key - 97]
+                elif 48 <= event.key <= 57:
+                    self.username += str(event.key - 48)
                         
     def draw(self):
         '''
@@ -313,3 +329,19 @@ class Game:
                               self.BoxHEIGHT, self.BoxWIDTH, j)
                         for j in i.coords()]
             pygame.draw.line(self.sc, BLACK(), Coordins[0], Coordins[1])
+
+    def login(self):
+
+        while not self.logged:
+            self.sc.fill(GRAY())
+
+            LogText = pygame.font.Font(None, 72).render('Enter your name: '
+                                                        + self.username,
+                                                         True, WHITE())
+            self.sc.blit(LogText, (10, 10))
+
+
+            for i in pygame.event.get():  # catches application's events
+                self.get_event(i)
+
+            pygame.display.update()
