@@ -1,4 +1,4 @@
 name points 
-admin 39715 
+admin 59962 
 adminn 200 
 ad 0 

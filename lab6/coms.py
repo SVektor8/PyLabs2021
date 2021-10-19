@@ -3,7 +3,7 @@ from math import sqrt, radians, sin, cos
 import pygame
 from GraphComs import trans, distance
 from Colors import YELLOW, OLIVE, WHITE, GRAY, RED, KINOVAR, BLACK, BERLIN_LAZUR
-from Colors import SKYBLUE
+from Colors import SKYBLUE, LUMINESCENTRED
 import yaml
 
 
@@ -17,7 +17,7 @@ class Ball:
 
     time_from_colliding = 11
 
-    def __init__(self, speedmax, xmax, ymax, xmin=0, ymin=0):
+    def __init__(self, speedmax, xmax, ymax, xmin=0, ymin=0, typ='determined'):
         '''
         Generating speed along x- and y- axes (speedx, speedy) and x- and y-
         coordinates (x, y)
@@ -27,8 +27,12 @@ class Ball:
         xmin, ymin -- minimal x- and y- coordinates of the ball
         '''
 
-        self.speedx = randrange(int(speedmax * 2 * 100 + 1)) / 100 - speedmax
-        self.speedy = randrange(-1, 2, 2) * sqrt(speedmax ** 2 - self.speedx ** 2)
+        self.define_speed(speedmax)
+        self.typ = typ
+
+        if self.typ == 'random':
+            self.speedmax = speedmax
+            self.timer = 15
         
         self.x = randrange(int((xmax - xmin - speedmax) * 100)) / 100 + xmin + speedmax/2
         self.y = randrange(int((ymax - ymin - speedmax) * 100)) / 100 + ymin + speedmax/2
@@ -40,12 +44,17 @@ class Ball:
         self.x += self.speedx
         self.y += self.speedy
 
+        if self.typ == 'random':
+            if self.timer <= 0 and self.time_from_colliding >= 30:
+                self.define_speed(self.speedmax * (50 + randrange(randrange(300, 401)))/randrange(80, 121))
+                self.timer = randrange(2, 25)
+
     def try_collision(self, AWall):
         '''
         Checks colliding with the wall object AWall and due to it changes the
         ball's speed along axes
         '''
-        if self.time_from_colliding >= 0:
+        if self.time_from_colliding >= 1:
             if AWall.orintation == 0:
                 if abs(AWall.y0 - self.y) <= abs((self.speedy)):
                     self.speedy = - self.speedy
@@ -64,6 +73,13 @@ class Ball:
         '''
         self.time_from_colliding += 1
 
+        if self.typ == 'random':
+            self.timer -= 1
+
+    def define_speed(self, speedmax):
+        
+        self.speedx = randrange(int(speedmax * 2 * 100 + 1)) / 100 - speedmax
+        self.speedy = randrange(-1, 2, 2) * sqrt(speedmax ** 2 - self.speedx ** 2)
 
 class Wall:
     '''
@@ -166,9 +182,14 @@ class Game:
         # Defining balls
         
         for i in range(self.Quantity):
-            self.pool.append(Ball(self.Maxspeed,
-                                  self.Xmax, self.Ymax,
-                                  -self.Xmax, -self.Ymax))
+            if i % 2:
+                self.pool.append(Ball(self.Maxspeed,
+                                      self.Xmax, self.Ymax,
+                                      -self.Xmax, -self.Ymax))
+            else:
+                self.pool.append(Ball(self.Maxspeed,
+                                      self.Xmax, self.Ymax,
+                                      -self.Xmax, -self.Ymax, typ='random'))
 
         # Defining walls
         
@@ -263,10 +284,11 @@ class Game:
                                           self.BoxHEIGHT, self.BoxWIDTH,
                                           (ball.x, ball.y))) <= self.radius:
                             self.score += ((ball.speedx**2 + ball.speedy**2)**0.5
-                                           /self.radius*1000)
+                                           /self.radius*1000 *
+                                           (1 + int(ball.typ=='random') * 0.5))
                             self.pool[i] = Ball(self.Maxspeed,
                                                 self.Xmax, self.Ymax,
-                                                -self.Xmax, -self.Ymax)
+                                                -self.Xmax, -self.Ymax, typ=ball.typ)
                             
         else:  # mode of changing the username
             if event.type == pygame.QUIT:
@@ -349,7 +371,12 @@ class Game:
         #Drawing the balls and the walls
 
         for i in self.pool:
-            pygame.draw.circle(self.sc, KINOVAR(), (trans(self.HEIGHT, self.WIDTH,
+            if i.typ == 'determined':
+                pygame.draw.circle(self.sc, KINOVAR(), (trans(self.HEIGHT, self.WIDTH,
+                                                     self.BoxHEIGHT, self.BoxWIDTH,
+                                                     [i.x, i.y])), self.radius)
+            elif i.typ == 'random':
+                pygame.draw.circle(self.sc, LUMINESCENTRED(), (trans(self.HEIGHT, self.WIDTH,
                                                      self.BoxHEIGHT, self.BoxWIDTH,
                                                      [i.x, i.y])), self.radius)
 
