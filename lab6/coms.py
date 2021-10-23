@@ -1,10 +1,11 @@
+import datetime
+import pygame
 from random import randrange
 from math import sqrt, radians, sin, cos
-import pygame
+
 from GraphComs import trans, distance
 from Colors import YELLOW, OLIVE, WHITE, GRAY, RED, KINOVAR, BLACK, BERLIN_LAZUR
 from Colors import SKYBLUE, LUMINESCENTRED
-import yaml
 
 
 class Ball:
@@ -25,6 +26,15 @@ class Ball:
         speedmax -- maximal speed along one axis (in fact the speed of the ball)
         xmax, ymax -- maximal x- and y- coordinates of the ball
         xmin, ymin -- minimal x- and y- coordinates of the ball
+        typ -- type of the ball:
+            'determined' -- usual ball with speed and coordinates determined at
+                the very beginning
+            'random' -- unusual ball, in which life is too much random: his time
+                of living is divided on intervals (each interval's length is
+                determined by random); on each interval it's speed is constant
+                (except colliding time), but on each interval in the beginning
+                speed is determined by random, too; of course, for catching this
+                ball player gets more score
         '''
 
         self.define_speed(speedmax)
@@ -32,22 +42,26 @@ class Ball:
 
         if self.typ == 'random':
             self.speedmax = speedmax
-            self.timer = 15
+            self.timer = 15  # timer, that determines length of intervals
+                             # of 'random' balls
         
         self.x = randrange(int((xmax - xmin - speedmax) * 100)) / 100 + xmin + speedmax/2
         self.y = randrange(int((ymax - ymin - speedmax) * 100)) / 100 + ymin + speedmax/2
         
     def move(self):
         '''
-        Changes the ball's coordinate on each iteration due to it's speed
+        Changes the ball's coordinate on each iteration due to it's speed;
+        Also changes 'random' balls' speed between intervals, but if it
+        collides, interval will be prolonged
         '''
         self.x += self.speedx
         self.y += self.speedy
 
-        if self.typ == 'random':
+        if self.typ == 'random':  # changing speed between intervals
             if self.timer <= 0 and self.time_from_colliding >= 30:
-                self.define_speed(self.speedmax * (50 + randrange(randrange(300, 401)))/randrange(80, 121))
-                self.timer = randrange(2, 25)
+                self.define_speed(self.speedmax * (50 + randrange(
+                    randrange(300, 401)))/randrange(80, 121))
+                self.timer = randrange(2, 25)  # defining length of next interval
 
     def try_collision(self, AWall):
         '''
@@ -73,10 +87,13 @@ class Ball:
         '''
         self.time_from_colliding += 1
 
-        if self.typ == 'random':
+        if self.typ == 'random':  # counting interval's time
             self.timer -= 1
 
     def define_speed(self, speedmax):
+        '''
+        Randomly defines speed along both x- and y- axes
+        '''
         
         self.speedx = randrange(int(speedmax * 2 * 100 + 1)) / 100 - speedmax
         self.speedy = randrange(-1, 2, 2) * sqrt(speedmax ** 2 - self.speedx ** 2)
@@ -163,6 +180,7 @@ class Game:
 
         self.time = game_length * FPS
         self.sc = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        self.logger = EventLogger()
 
         self.login()  # taking user's name
         self.restart()  # Refreshing session's data
@@ -177,16 +195,17 @@ class Game:
         self.highscore = max(self.highscore, self.score)
         self.score = 0
 
+        self.logger.game_event('restarted')
         self.write_stats()
 
         # Defining balls
         
         for i in range(self.Quantity):
-            if i % 2:
+            if i % 2:  # draws 'determined' balls
                 self.pool.append(Ball(self.Maxspeed,
                                       self.Xmax, self.Ymax,
                                       -self.Xmax, -self.Ymax))
-            else:
+            else:  # draws 'random' balls
                 self.pool.append(Ball(self.Maxspeed,
                                       self.Xmax, self.Ymax,
                                       -self.Xmax, -self.Ymax, typ='random'))
@@ -252,6 +271,8 @@ class Game:
         '''
         Works with events
         '''
+        self.logger.get_event(event)
+        
         if self.logged:  # game mode
             if event.type == pygame.QUIT:
                 exit()  # Quits
@@ -428,3 +449,96 @@ class Game:
                 for j in i:
                     f.write(j + ' ')
                 f.write('\n')
+
+
+class EventLogger():
+    
+    logger_path = 'events.txt'
+
+    def __init__(self):
+        self.write_event('EventLogger initialized')
+
+    def write_event(self, text):
+        date_now = str(datetime.datetime.now())
+        
+        with open(self.logger_path, 'a') as f:
+            f.write(date_now + ' ' + text + '\n')
+
+    def game_event(self, text):
+        self.write_event('Game ' + text)
+
+    def button_event(self, text, typ):
+        if typ == 'ButtonDown':
+            self.write_event('Pushed Button ' + text)
+        elif typ == 'ButtonUp':
+            self.write_event('Released Button ' + text)
+
+    def mouse_event(self, text, button='Left'):
+        self.write_event('Pushed ' + button + 'MouseButton ' + text)
+
+    def get_event(self, event):
+        if event.type == pygame.QUIT:
+            self.game_event('ended')
+        elif event.type == pygame.KEYDOWN:
+            typ = 'ButtonDown'
+        elif event.type == pygame.KEYUP:
+            typ = 'ButtonUp'
+
+        if event.type in [pygame.KEYDOWN, pygame.KEYUP]:  
+            if event.key == pygame.K_SPACE:
+                self.button_event('Space', typ)
+            elif event.key == pygame.K_UP:
+                self.button_event('Up arrow', typ)
+            elif event.key == pygame.K_DOWN:
+                self.button_event('Down arrow', typ)
+            elif event.key == pygame.K_w:
+                self.button_event('W', typ)
+            elif event.key == pygame.K_s:
+                self.button_event('S', typ)
+            elif event.key == pygame.K_BACKSPACE:  
+                self.button_event('BACKSPACE', typ)
+            elif event.key == 13: 
+                self.button_event('ENTER', typ)
+                    
+            elif 97 <= event.key <= 122:  # typing a letter
+                letters = 'abcdefghijklmnopqrstuvwxyz'
+                self.button_event(letters[event.key - 97], typ)
+            elif 48 <= event.key <= 57:  # typing a digit
+                self.button_event(str(event.key - 48), typ)
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                position = event.pos
+                self.mouse_event(' at ' + str(position[0])
+                                 + ' ' + str(position[1]))
+'''
+elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # checks catching a ball
+                position = event.pos
+                    
+                for i, ball in enumerate(self.pool):
+                    if distance(position,
+                                trans(self.HEIGHT, self.WIDTH,
+                                        self.BoxHEIGHT, self.BoxWIDTH,
+                                        (ball.x, ball.y))) <= self.radius:
+                        self.score += ((ball.speedx**2 + ball.speedy**2)**0.5
+                                        /self.radius*1000 *
+                                        (1 + int(ball.typ=='random') * 0.5))
+                        self.pool[i] = Ball(self.Maxspeed,
+                                            self.Xmax, self.Ymax,
+                                            -self.Xmax, -self.Ymax, typ=ball.typ)                            
+    else:  # mode of changing the username
+        if event.type == pygame.QUIT:
+            exit()  # Quits
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_BACKSPACE:  # deletes last symbol
+                self.username = self.username[:-1]
+            elif event.key == 13:  # Enter button, to go to game mode
+                self.logged = True
+                    
+            elif 97 <= event.key <= 122:  # typing a letter
+                letters = 'abcdefghijklmnopqrstuvwxyz'
+                self.username += letters[event.key - 97]
+            elif 48 <= event.key <= 57:  # typing a digit
+                self.username += str(event.key - 48)
+                '''
