@@ -319,6 +319,7 @@ class Game:
                     self.username = self.username[:-1]
                 elif event.key == 13:  # Enter button, to go to game mode
                     self.logged = True
+                    self.logger.write_event('User logged as ' + self.username)
                     
                 elif 97 <= event.key <= 122:  # typing a letter
                     letters = 'abcdefghijklmnopqrstuvwxyz'
@@ -452,31 +453,59 @@ class Game:
 
 
 class EventLogger():
-    
+    '''
+    Class that catches all events and write it to a file
+    logger_path -- path to a file, where events are written
+    '''
     logger_path = 'events.txt'
 
     def __init__(self):
+        '''
+        Initialization of the logger
+        '''
         self.write_event('EventLogger initialized')
 
     def write_event(self, text):
+        '''
+        Basic event-write command, write time of the event and it's name
+        text -- name of the event
+        '''
         date_now = str(datetime.datetime.now())
         
         with open(self.logger_path, 'a') as f:
             f.write(date_now + ' ' + text + '\n')
 
     def game_event(self, text):
+        '''
+        Writes event bounded with the game
+        text -- name of the event
+        '''
         self.write_event('Game ' + text)
 
     def button_event(self, text, typ):
+        '''
+        Writes event bounded with buttons
+        text -- name of the event
+        typ -- 'ButtonDown' or 'ButtonUp', depends on what was done with button
+        '''
         if typ == 'ButtonDown':
             self.write_event('Pushed Button ' + text)
         elif typ == 'ButtonUp':
             self.write_event('Released Button ' + text)
 
     def mouse_event(self, text, button='Left'):
+        '''
+        Writes mouse click event
+        text -- name of the event
+        button -- 'Left' or 'Right' button of the mouse
+        '''
         self.write_event('Pushed ' + button + 'MouseButton ' + text)
 
     def get_event(self, event):
+        '''
+        Works with pygame events
+        '''
+        
         if event.type == pygame.QUIT:
             self.game_event('ended')
         elif event.type == pygame.KEYDOWN:
@@ -500,10 +529,10 @@ class EventLogger():
             elif event.key == 13: 
                 self.button_event('ENTER', typ)
                     
-            elif 97 <= event.key <= 122:  # typing a letter
+            elif 97 <= event.key <= 122: 
                 letters = 'abcdefghijklmnopqrstuvwxyz'
                 self.button_event(letters[event.key - 97], typ)
-            elif 48 <= event.key <= 57:  # typing a digit
+            elif 48 <= event.key <= 57: 
                 self.button_event(str(event.key - 48), typ)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -511,34 +540,3 @@ class EventLogger():
                 position = event.pos
                 self.mouse_event(' at ' + str(position[0])
                                  + ' ' + str(position[1]))
-'''
-elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:  # checks catching a ball
-                position = event.pos
-                    
-                for i, ball in enumerate(self.pool):
-                    if distance(position,
-                                trans(self.HEIGHT, self.WIDTH,
-                                        self.BoxHEIGHT, self.BoxWIDTH,
-                                        (ball.x, ball.y))) <= self.radius:
-                        self.score += ((ball.speedx**2 + ball.speedy**2)**0.5
-                                        /self.radius*1000 *
-                                        (1 + int(ball.typ=='random') * 0.5))
-                        self.pool[i] = Ball(self.Maxspeed,
-                                            self.Xmax, self.Ymax,
-                                            -self.Xmax, -self.Ymax, typ=ball.typ)                            
-    else:  # mode of changing the username
-        if event.type == pygame.QUIT:
-            exit()  # Quits
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_BACKSPACE:  # deletes last symbol
-                self.username = self.username[:-1]
-            elif event.key == 13:  # Enter button, to go to game mode
-                self.logged = True
-                    
-            elif 97 <= event.key <= 122:  # typing a letter
-                letters = 'abcdefghijklmnopqrstuvwxyz'
-                self.username += letters[event.key - 97]
-            elif 48 <= event.key <= 57:  # typing a digit
-                self.username += str(event.key - 48)
-                '''
