@@ -452,7 +452,7 @@ class Game:
                 f.write('\n')
 
 
-class EventLogger():
+class EventLogger:
     '''
     Class that catches all events and write it to a file
     logger_path -- path to a file, where events are written
