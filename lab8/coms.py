@@ -1,7 +1,7 @@
 import datetime
 import pygame
 from random import randrange
-from math import sqrt, sin, cos, radians
+from math import sqrt, sin, cos
 
 from GraphComs import trans, distance
 from Colors import YELLOW, OLIVE, WHITE, GRAY, RED, KINOVAR, BLACK, BERLIN_LAZUR
@@ -18,10 +18,11 @@ class Ball:
 
     time_from_colliding = 11
 
-    def __init__(self, x, y, speed_x=0, speed_y=0, angle=0):
+    def __init__(self, x, y, radius, speed_x=0, speed_y=0):
 
         self.x, self.y = x, y
         self.speed_x, self.speed_y = speed_x, speed_y
+        self.radius = radius
 
     def move(self):
         '''
@@ -61,7 +62,7 @@ class Ball:
 
 
 class Target(Ball):
-    def __init__(self, speedmax, xmax, ymax, xmin=0, ymin=0, typ='determined'):
+    def __init__(self, speedmax, xmax, ymax, xmin=0, ymin=0, typ='determined', radius=7):
         '''
             Generating speed along x- and y- axes (speedx, speedy) and x- and y-
             coordinates (x, y)
@@ -82,6 +83,7 @@ class Target(Ball):
 
         self.define_speed(speedmax)
         self.typ = typ
+        self.radius = radius
 
         if self.typ == 'random':
             self.speedmax = speedmax
@@ -105,6 +107,20 @@ class Target(Ball):
                 self.define_speed(self.speedmax * (50 + randrange(
                     randrange(300, 401))) / randrange(80, 121))
                 self.timer = randrange(2, 25)  # defining length of next interval
+
+
+class Bullet(Ball):
+    speed = 100
+    caliber = 1
+
+    def __init__(self, x, y, angle):
+        self.x, self.y = x, y
+        self.speed_x, self.speed_y = self.speed * cos(angle), self.speed * sin(angle)
+
+    def hit(self, a_target):
+        if distance((self.x, self.y), (a_target.x, a_target.y)) <= \
+                self.caliber + a_target.radius:
+            return True
 
 
 class Wall:
@@ -134,7 +150,6 @@ class Wall:
 
 
 class Gun:
-    bullet_speed = 100
 
     def __init__(self, x, y, speed_x=0, speed_y=0, angle=0):
         self.x, self.y = x, y
@@ -145,9 +160,8 @@ class Gun:
         self.x += self.speed_x
         self.y += self.speed_y
 
-    #def shoot(self):
-        #return Ball(self.x, self.y, )
-
+    def shoot(self):
+        return Ball(self.x, self.y, self.angle)
 
 
 class Game:
@@ -219,6 +233,9 @@ class Game:
         '''
         self.Walls = []
         self.pool = []
+        self.guns = []
+        self.bullets = []
+
         self.highscore = max(self.highscore, self.score)
         self.score = 0
 
@@ -231,11 +248,11 @@ class Game:
             if i % 2:  # draws 'determined' balls
                 self.pool.append(Target(self.Maxspeed,
                                       self.Xmax, self.Ymax,
-                                      -self.Xmax, -self.Ymax))
+                                      -self.Xmax, -self.Ymax, radius=self.radius))
             else:  # draws 'random' balls
                 self.pool.append(Target(self.Maxspeed,
                                       self.Xmax, self.Ymax,
-                                      -self.Xmax, -self.Ymax, typ='random'))
+                                      -self.Xmax, -self.Ymax, radius=self.radius, typ='random'))
 
         # Defining walls
 
@@ -336,7 +353,8 @@ class Game:
                                            (1 + int(ball.typ == 'random') * 0.5))
                             self.pool[i] = Target(self.Maxspeed,
                                                 self.Xmax, self.Ymax,
-                                                -self.Xmax, -self.Ymax, typ=ball.typ)
+                                                -self.Xmax, -self.Ymax,
+                                                  radius=self.radius, typ=ball.typ)
 
         else:  # mode of changing the username
             if event.type == pygame.QUIT:

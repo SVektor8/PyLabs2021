@@ -1,0 +1,120 @@
+2021-10-25 10:14:11.499764 EventLogger initialized
+2021-10-25 10:14:13.470306 Pushed Button ENTER
+2021-10-25 10:14:13.471328 User logged as admin
+2021-10-25 10:14:13.474291 Game restarted
+2021-10-25 10:15:06.846971 EventLogger initialized
+2021-10-25 10:15:07.909754 Pushed Button ENTER
+2021-10-25 10:15:07.911752 User logged as admin
+2021-10-25 10:15:07.914754 Game restarted
+2021-10-25 10:17:26.178130 EventLogger initialized
+2021-10-25 10:17:27.329396 Pushed Button ENTER
+2021-10-25 10:17:27.330398 User logged as admin
+2021-10-25 10:17:27.333401 Game restarted
+2021-10-25 10:17:27.441427 Released Button ENTER
+2021-10-25 10:18:02.095794 Game restarted
+2021-10-25 10:18:30.615182 EventLogger initialized
+2021-10-25 10:18:31.116310 Pushed LeftMouseButton  at 582 290
+2021-10-25 10:18:31.695567 Pushed Button ENTER
+2021-10-25 10:18:31.696561 User logged as admin
+2021-10-25 10:18:31.699565 Game restarted
+2021-10-25 10:18:31.839599 Released Button ENTER
+2021-10-25 10:18:35.257686 Pushed LeftMouseButton  at 631 172
+2021-10-25 10:18:36.310937 Pushed LeftMouseButton  at 688 164
+2021-10-25 10:18:37.120145 Pushed LeftMouseButton  at 650 152
+2021-10-25 10:18:37.923345 Pushed LeftMouseButton  at 677 183
+2021-10-25 10:18:39.950854 Pushed LeftMouseButton  at 891 641
+2021-10-25 10:18:43.316790 Pushed LeftMouseButton  at 686 504
+2021-10-25 10:19:04.887538 Game restarted
+2021-10-25 10:19:39.534399 Game restarted
+2021-10-25 10:20:15.389093 Game restarted
+2021-10-25 10:20:56.449551 Game restarted
+2021-10-25 10:21:38.927337 Game restarted
+2021-10-25 10:22:15.703726 Game restarted
+2021-10-25 10:22:54.320632 Game restarted
+2021-10-25 10:23:33.828116 Game restarted
+2021-10-25 10:24:18.500952 Game restarted
+2021-10-25 10:25:00.200470 Game restarted
+2021-10-25 10:25:44.911633 Game restarted
+2021-10-25 10:26:26.120409 Game restarted
+2021-10-25 10:27:06.734310 Game restarted
+2021-10-25 10:27:44.057013 Game restarted
+2021-10-25 10:28:18.717491 Game restarted
+2021-10-25 10:28:58.201104 Game restarted
+2021-10-25 10:29:33.611400 Game restarted
+2021-10-25 10:30:08.053513 Game restarted
+2021-10-25 10:30:37.743321 Game restarted
+2021-10-25 10:31:07.682430 Game restarted
+2021-10-25 10:31:37.994209 Game restarted
+2021-10-25 10:32:18.167768 Game restarted
+2021-10-25 10:32:51.856335 Game restarted
+2021-10-25 10:33:23.313179 Game restarted
+2021-10-25 10:33:56.942802 Game restarted
+2021-10-25 10:34:34.517922 Game restarted
+2021-10-25 10:35:17.132291 Game restarted
+2021-10-25 10:35:54.899524 Game restarted
+2021-10-25 10:36:47.066975 Game restarted
+2021-10-25 10:37:19.548002 Game restarted
+2021-10-25 10:37:55.794724 Game restarted
+2021-10-25 10:38:20.808934 Game ended
+2021-10-25 10:38:36.302062 EventLogger initialized
+2021-10-25 10:38:37.273284 Pushed Button ENTER
+2021-10-25 10:38:37.275281 User logged as admin
+2021-10-25 10:38:37.277285 Game restarted
+2021-10-25 10:39:43.484523 EventLogger initialized
+2021-10-25 10:39:56.136315 Pushed Button ENTER
+2021-10-25 10:39:56.138317 User logged as admin
+2021-10-25 10:39:56.142319 Game restarted
+2021-10-25 10:39:56.240343 Released Button ENTER
+2021-10-25 10:40:00.824499 Pushed LeftMouseButton  at 718 477
+2021-10-25 10:40:01.727718 Pushed LeftMouseButton  at 696 457
+2021-10-25 10:40:33.335621 EventLogger initialized
+2021-10-25 10:40:34.546958 Pushed Button ENTER
+2021-10-25 10:40:34.547956 User logged as admin
+2021-10-25 10:40:34.551958 Game restarted
+2021-10-25 10:40:34.730002 Released Button ENTER
+2021-10-25 10:40:36.842535 Pushed LeftMouseButton  at 688 305
+2021-10-25 10:40:37.793772 Pushed LeftMouseButton  at 698 284
+2021-10-25 10:40:41.026676 Pushed LeftMouseButton  at 668 174
+2021-10-25 10:40:41.474693 Pushed LeftMouseButton  at 668 203
+2021-10-25 10:40:42.017825 Pushed LeftMouseButton  at 687 208
+2021-10-25 10:40:43.126219 Pushed Button Up arrow
+2021-10-25 10:40:43.218250 Pushed Button Down arrow
+2021-10-25 10:40:43.374305 Released Button Down arrow
+2021-10-25 10:40:43.538208 Released Button Up arrow
+2021-10-25 10:40:43.696343 Pushed Button Up arrow
+2021-10-25 10:40:43.891297 Released Button Up arrow
+2021-10-25 10:40:44.056339 Pushed Button Down arrow
+2021-10-25 10:40:44.228381 Released Button Down arrow
+2021-10-25 10:40:44.334505 Pushed Button Down arrow
+2021-10-25 10:40:44.462561 Released Button Down arrow
+2021-10-25 10:40:44.564562 Pushed Button Down arrow
+2021-10-25 10:40:44.715597 Released Button Down arrow
+2021-10-25 10:40:45.831782 Pushed Button W
+2021-10-25 10:40:45.986458 Released Button W
+2021-10-25 10:40:46.017843 Pushed Button W
+2021-10-25 10:40:46.111753 Released Button W
+2021-10-25 10:40:46.202896 Pushed Button W
+2021-10-25 10:40:46.294920 Released Button W
+2021-10-25 10:40:46.358936 Pushed Button W
+2021-10-25 10:40:46.451834 Released Button W
+2021-10-25 10:40:46.514972 Pushed Button S
+2021-10-25 10:40:46.650005 Released Button S
+2021-10-25 10:40:46.683010 Pushed Button S
+2021-10-25 10:40:46.811927 Released Button S
+2021-10-25 10:40:46.849935 Pushed Button S
+2021-10-25 10:40:46.983972 Released Button S
+2021-10-25 10:40:47.053988 Pushed Button S
+2021-10-25 10:40:47.153010 Released Button S
+2021-10-25 10:40:47.221027 Pushed Button S
+2021-10-25 10:40:47.288136 Released Button S
+2021-10-25 10:40:47.359095 Pushed Button S
+2021-10-25 10:40:47.438083 Released Button S
+2021-10-25 10:41:06.015305 Game restarted
+2021-10-25 10:41:40.073486 Game restarted
+2021-10-25 10:42:28.433556 Game restarted
+2021-10-25 10:43:12.866789 Game restarted
+2021-10-25 10:43:54.235596 Game restarted
+2021-10-25 10:44:27.636742 Game restarted
+2021-10-25 10:44:59.730715 Game restarted
+2021-10-25 10:45:37.169475 Game restarted
+2021-10-25 10:46:14.490019 Game restarted
