@@ -43,11 +43,11 @@ class Ball:
         if self.typ == 'random':
             self.speedmax = speedmax
             self.timer = 15  # timer, that determines length of intervals
-                             # of 'random' balls
-        
-        self.x = randrange(int((xmax - xmin - speedmax) * 100)) / 100 + xmin + speedmax/2
-        self.y = randrange(int((ymax - ymin - speedmax) * 100)) / 100 + ymin + speedmax/2
-        
+            # of 'random' balls
+
+        self.x = randrange(int((xmax - xmin - speedmax) * 100)) / 100 + xmin + speedmax / 2
+        self.y = randrange(int((ymax - ymin - speedmax) * 100)) / 100 + ymin + speedmax / 2
+
     def move(self):
         '''
         Changes the ball's coordinate on each iteration due to it's speed;
@@ -60,7 +60,7 @@ class Ball:
         if self.typ == 'random':  # changing speed between intervals
             if self.timer <= 0 and self.time_from_colliding >= 30:
                 self.define_speed(self.speedmax * (50 + randrange(
-                    randrange(300, 401)))/randrange(80, 121))
+                    randrange(300, 401))) / randrange(80, 121))
                 self.timer = randrange(2, 25)  # defining length of next interval
 
     def try_collision(self, AWall):
@@ -94,9 +94,10 @@ class Ball:
         '''
         Randomly defines speed along both x- and y- axes
         '''
-        
+
         self.speedx = randrange(int(speedmax * 2 * 100 + 1)) / 100 - speedmax
         self.speedy = randrange(-1, 2, 2) * sqrt(speedmax ** 2 - self.speedx ** 2)
+
 
 class Wall:
     '''
@@ -116,12 +117,13 @@ class Wall:
         self.y0 = y0
         self.y1 = y1
         self.orintation = ori
-        
+
     def coords(self):
         '''
         Returns two-dimensional list of wall's end-points' coordinates
         '''
         return [[self.x0, self.y0], [self.x1, self.y1]]
+
 
 class Game:
     '''
@@ -152,7 +154,7 @@ class Game:
     data_path = 'data.txt'
 
     def __init__(self, Maxspeed, Xmax, Ymax, Quantity, radius,
-                 FPS = 90, WIDTH = 1100, HEIGHT = 700, game_length = 15):
+                 FPS=90, WIDTH=1100, HEIGHT=700, game_length=15):
         '''
         Defining start parameters of the session:
 
@@ -199,7 +201,7 @@ class Game:
         self.write_stats()
 
         # Defining balls
-        
+
         for i in range(self.Quantity):
             if i % 2:  # draws 'determined' balls
                 self.pool.append(Ball(self.Maxspeed,
@@ -211,26 +213,25 @@ class Game:
                                       -self.Xmax, -self.Ymax, typ='random'))
 
         # Defining walls
-        
+
         self.Walls.append(Wall(self.Xmax, self.Ymax,
-                          self.Xmax, -self.Ymax,
-                          90))  # right wall
+                               self.Xmax, -self.Ymax,
+                               90))  # right wall
         self.Walls.append(Wall(-self.Xmax, self.Ymax,
-                          -self.Xmax, -self.Ymax,
-                          90))  # left wall
+                               -self.Xmax, -self.Ymax,
+                               90))  # left wall
         self.Walls.append(Wall(-self.Xmax, -self.Ymax,
-                          self.Xmax, -self.Ymax,
-                          0))  # bottom wall
+                               self.Xmax, -self.Ymax,
+                               0))  # bottom wall
         self.Walls.append(Wall(-self.Xmax, self.Ymax,
-                          self.Xmax, self.Ymax,
-                          0))  # top wall
+                               self.Xmax, self.Ymax,
+                               0))  # top wall
 
         # Updating all-time highscore
-        
+
         if int(open(self.data_path, 'r').read().split()[0]) < self.highscore:
             with open(self.data_path, 'w') as f:
                 f.write(str(int(self.highscore)) + ' by ' + self.username)
-        
 
     def update(self):
         '''
@@ -243,74 +244,74 @@ class Game:
         self.time -= 1
 
         self.draw()  # draws all on the screen
-        
+
         for i in self.pool:  # updates balls' positions and checks collisions
 
             for j in self.Walls:
                 i.try_collision(j)
-                
+
             i.move()
 
             i.clocktickes()
 
         if abs(self.MaxspeedChanging):  # checks if user changed balls' speed
             OldMaxspeed = self.Maxspeed
-            
+
             self.Maxspeed += self.MaxspeedChanging * 0.05
             if self.Maxspeed <= 0:
                 self.Maxspeed = 0.05
 
             for i in self.pool:
-                i.speedx *= self.Maxspeed/OldMaxspeed
-                i.speedy *= self.Maxspeed/OldMaxspeed
+                i.speedx *= self.Maxspeed / OldMaxspeed
+                i.speedy *= self.Maxspeed / OldMaxspeed
 
         for i in pygame.event.get():  # catches application's events
             self.get_event(i)
-        
+
     def get_event(self, event):
         '''
         Works with events
         '''
         self.logger.get_event(event)
-        
+
         if self.logged:  # game mode
             if event.type == pygame.QUIT:
                 exit()  # Quits
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.restart()  # Launchs new game
-                    
+
                 elif event.key == pygame.K_UP:
                     self.radius += 1  # Makes balls bigger
                 elif event.key == pygame.K_DOWN:
                     if self.radius >= 2:
                         self.radius -= 1  # Makes balls smaller, but not with
-                                          # zero radius
+                        # zero radius
                 elif event.key == pygame.K_w:
                     self.MaxspeedChanging = 1  # Makes balls faster
                 elif event.key == pygame.K_s:
                     self.MaxspeedChanging = -1  # Makes balls slower
-                    
+
             elif event.type == pygame.KEYUP:
                 if event.key in [pygame.K_w, pygame.K_s]:
                     self.MaxspeedChanging = 0  # Stops changing balls' speed
-                    
+
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:  # checks catching a ball
                     position = event.pos
-                    
+
                     for i, ball in enumerate(self.pool):
                         if distance(position,
                                     trans(self.HEIGHT, self.WIDTH,
                                           self.BoxHEIGHT, self.BoxWIDTH,
                                           (ball.x, ball.y))) <= self.radius:
-                            self.score += ((ball.speedx**2 + ball.speedy**2)**0.5
-                                           /self.radius*1000 *
-                                           (1 + int(ball.typ=='random') * 0.5))
+                            self.score += ((ball.speedx ** 2 + ball.speedy ** 2) ** 0.5
+                                           / self.radius * 1000 *
+                                           (1 + int(ball.typ == 'random') * 0.5))
                             self.pool[i] = Ball(self.Maxspeed,
                                                 self.Xmax, self.Ymax,
                                                 -self.Xmax, -self.Ymax, typ=ball.typ)
-                            
+
         else:  # mode of changing the username
             if event.type == pygame.QUIT:
                 exit()  # Quits
@@ -320,20 +321,20 @@ class Game:
                 elif event.key == 13:  # Enter button, to go to game mode
                     self.logged = True
                     self.logger.write_event('User logged as ' + self.username)
-                    
+
                 elif 97 <= event.key <= 122:  # typing a letter
                     letters = 'abcdefghijklmnopqrstuvwxyz'
                     self.username += letters[event.key - 97]
                 elif 48 <= event.key <= 57:  # typing a digit
                     self.username += str(event.key - 48)
-                        
+
     def draw(self):
         '''
         Draws all on the screen
         '''
         self.sc.fill(GRAY())
 
-        #Writing necessary signs in the left part of the game window
+        # Writing necessary signs in the left part of the game window
 
         ScoreText = pygame.font.Font(None, 128).render('Score: '
                                                        + str(int(self.score)),
@@ -342,22 +343,22 @@ class Game:
 
         HighScoreText = pygame.font.Font(None, 72).render('Highcore: '
                                                           + str(int(self.highscore)),
-                                                       True, OLIVE())
+                                                          True, OLIVE())
         self.sc.blit(HighScoreText, (10, 150))
 
         AllTimeHighScoreText = pygame.font.Font(None, 36).render('All-time Highcore: '
-                                                          + open(self.data_path,
-                                                                 'r').read(),
+                                                                 + open(self.data_path,
+                                                                        'r').read(),
                                                                  True, OLIVE())
         self.sc.blit(AllTimeHighScoreText, (120, 20))
-        
+
         SpeedText = pygame.font.Font(None, 72).render('Balls speed: '
-                                                      + str(int(self.Maxspeed*20)),
-                                                       True, WHITE())
+                                                      + str(int(self.Maxspeed * 20)),
+                                                      True, WHITE())
         self.sc.blit(SpeedText, (10, 220))
 
         ChangeSpeedText = pygame.font.Font(None, 36).render('To change use W and S buttons',
-                                                      True, WHITE())
+                                                            True, WHITE())
         self.sc.blit(ChangeSpeedText, (10, 275))
 
         RadiusText = pygame.font.Font(None, 96).render('Balls radius: '
@@ -366,10 +367,10 @@ class Game:
         self.sc.blit(RadiusText, (10, 315))
 
         ChangeRadiusText = pygame.font.Font(None, 36).render('To change use UP and DOWN arrows',
-                                                       True, WHITE())
+                                                             True, WHITE())
         self.sc.blit(ChangeRadiusText, (10, 386))
 
-        TimeText = pygame.font.Font(None, 72).render(str(self.time//self.FPS),
+        TimeText = pygame.font.Font(None, 72).render(str(self.time // self.FPS),
                                                      True, RED())
         self.sc.blit(TimeText, (10, 10))
 
@@ -382,25 +383,25 @@ class Game:
         with open(self.database_path, 'r') as f:  # reading data
             loaded = [i.split() for i in f.read().splitlines()]
         del loaded[0]
-        loaded = sorted(loaded, key = lambda x: x[1], reverse = True) #sorting data
+        loaded = sorted(loaded, key=lambda x: x[1], reverse=True)  # sorting data
 
         for i, string in enumerate(loaded):  # writing each rank
             Text = pygame.font.Font(None, 24).render(str(i + 1) + '. ' + string[0] +
                                                      ' ' + string[1],
-                                                           True, BERLIN_LAZUR())
+                                                     True, BERLIN_LAZUR())
             self.sc.blit(Text, (10, 440 + i * 20))
 
-        #Drawing the balls and the walls
+        # Drawing the balls and the walls
 
         for i in self.pool:
             if i.typ == 'determined':
                 pygame.draw.circle(self.sc, KINOVAR(), (trans(self.HEIGHT, self.WIDTH,
-                                                     self.BoxHEIGHT, self.BoxWIDTH,
-                                                     [i.x, i.y])), self.radius)
+                                                              self.BoxHEIGHT, self.BoxWIDTH,
+                                                              [i.x, i.y])), self.radius)
             elif i.typ == 'random':
                 pygame.draw.circle(self.sc, LUMINESCENTRED(), (trans(self.HEIGHT, self.WIDTH,
-                                                     self.BoxHEIGHT, self.BoxWIDTH,
-                                                     [i.x, i.y])), self.radius)
+                                                                     self.BoxHEIGHT, self.BoxWIDTH,
+                                                                     [i.x, i.y])), self.radius)
 
         for i in self.Walls:
             Coordins = [trans(self.HEIGHT, self.WIDTH,
@@ -415,12 +416,11 @@ class Game:
 
         while not self.logged:  # waiting for typing the nickname
             self.sc.fill(GRAY())
-            
+
             LogText = pygame.font.Font(None, 72).render('Enter your name: '
                                                         + self.username,
-                                                         True, WHITE())
+                                                        True, WHITE())
             self.sc.blit(LogText, (10, 10))
-
 
             for i in pygame.event.get():  # catches application's events
                 self.get_event(i)
@@ -432,7 +432,7 @@ class Game:
         Updates users' statistics
         '''
         is_new = True
-        
+
         with open(self.database_path, 'r') as f:  # reading old statistics
             loaded = [i.split() for i in f.read().splitlines()]
 
@@ -444,7 +444,7 @@ class Game:
 
         if is_new:  # if user is new, adding him
             loaded.append([self.username, str(int(self.highscore))])
-            
+
         with open(self.database_path, 'w') as f:  # loading statistics to the file
             for i in loaded:
                 for j in i:
@@ -471,7 +471,7 @@ class EventLogger():
         text -- name of the event
         '''
         date_now = str(datetime.datetime.now())
-        
+
         with open(self.logger_path, 'a') as f:
             f.write(date_now + ' ' + text + '\n')
 
@@ -505,7 +505,7 @@ class EventLogger():
         '''
         Works with pygame events
         '''
-        
+
         if event.type == pygame.QUIT:
             self.game_event('ended')
         elif event.type == pygame.KEYDOWN:
@@ -513,7 +513,7 @@ class EventLogger():
         elif event.type == pygame.KEYUP:
             typ = 'ButtonUp'
 
-        if event.type in [pygame.KEYDOWN, pygame.KEYUP]:  
+        if event.type in [pygame.KEYDOWN, pygame.KEYUP]:
             if event.key == pygame.K_SPACE:
                 self.button_event('Space', typ)
             elif event.key == pygame.K_UP:
@@ -524,15 +524,15 @@ class EventLogger():
                 self.button_event('W', typ)
             elif event.key == pygame.K_s:
                 self.button_event('S', typ)
-            elif event.key == pygame.K_BACKSPACE:  
+            elif event.key == pygame.K_BACKSPACE:
                 self.button_event('BACKSPACE', typ)
-            elif event.key == 13: 
+            elif event.key == 13:
                 self.button_event('ENTER', typ)
-                    
-            elif 97 <= event.key <= 122: 
+
+            elif 97 <= event.key <= 122:
                 letters = 'abcdefghijklmnopqrstuvwxyz'
                 self.button_event(letters[event.key - 97], typ)
-            elif 48 <= event.key <= 57: 
+            elif 48 <= event.key <= 57:
                 self.button_event(str(event.key - 48), typ)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
