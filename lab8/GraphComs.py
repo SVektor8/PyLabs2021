@@ -15,6 +15,7 @@ def trans(Height, Width, BoxHeight, BoxWidth, coords):
     y0 = coords[1]
     return int(Width + x0 - BoxWidth / 2), int(Height - BoxHeight / 2 - y0)
 
+
 def distance(pos1, pos2):
     '''
     Returns distance between two dots
@@ -22,5 +23,4 @@ def distance(pos1, pos2):
     pos1, pos2 -- turples, each of two numbers, first number in each turple is
         x-coordinate of the dot, second number -- y-coordinate
     '''
-    return ((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)**0.5
-
+    return ((pos1[0] - pos2[0]) ** 2 + (pos1[1] - pos2[1]) ** 2) ** 0.5
