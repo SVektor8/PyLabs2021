@@ -1,7 +1,7 @@
 import datetime
 import pygame
 from random import randrange
-from math import sqrt, radians, sin, cos
+from math import sqrt
 
 from GraphComs import trans, distance
 from Colors import YELLOW, OLIVE, WHITE, GRAY, RED, KINOVAR, BLACK, BERLIN_LAZUR
