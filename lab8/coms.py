@@ -269,6 +269,10 @@ class Game:
                                self.Xmax, self.Ymax,
                                0))  # top wall
 
+        #Defining gun
+
+        self.guns.append(Gun(-self.Xmax, 0))
+
         # Updating all-time highscore
 
         if int(open(self.data_path, 'r').read().split()[0]) < self.highscore:
@@ -452,6 +456,18 @@ class Game:
                               self.BoxHEIGHT, self.BoxWIDTH, j)
                         for j in i.coords()]
             pygame.draw.line(self.sc, BLACK(), Coordins[0], Coordins[1])
+
+        for i in self.guns:
+            pygame.draw.polygon(self.sc, BLACK(),
+                                [trans(self.HEIGHT, self.WIDTH,
+                                       self.BoxHEIGHT, self.BoxWIDTH,
+                                       (i.x, i.y)),
+                                 trans(self.HEIGHT, self.WIDTH,
+                                       self.BoxHEIGHT, self.BoxWIDTH,
+                                       (i.x - 25, i.y - 7)),
+                                 trans(self.HEIGHT, self.WIDTH,
+                                       self.BoxHEIGHT, self.BoxWIDTH,
+                                       (i.x - 25, i.y + 7))])
 
     def login(self):
         '''
