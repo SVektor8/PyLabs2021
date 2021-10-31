@@ -1,53 +1,38 @@
-# Module with different colors, every function returns a turple of three numbers
-# (<RED>, <GREEN>, <BLUE>), which is the RGB-code of the color
-
-def DARKKHAKI():
-    return (189, 183, 107)
+def game_colors():
+    return [red(), blue(), yellow(), green(), magenta(), cyan()]
 
 
-def OLIVE():
-    return (128, 128, 0)
+def red():
+    return 0xFF0000
 
 
-def WHITE():
-    return (255, 255, 255)
+def blue():
+    return 0x0000FF
 
 
-def BLUE():
-    return (0, 70, 225)
+def yellow():
+    return 0xFFC91F
 
 
-def RED():
-    return (225, 0, 50)
+def green():
+    return 0x00FF00
 
 
-def GREEN():
-    return (0, 225, 0)
+def magenta():
+    return 0xFF03B8
 
 
-def BLACK():
-    return (0, 0, 0)
+def cyan():
+    return 0x00FFCC
 
 
-def YELLOW():
-    return (255, 255, 0)
+def black():
+    return 0x000000
 
 
-def GRAY():
-    return (80, 80, 80)
+def white():
+    return 0xFFFFFF
 
 
-def KINOVAR():
-    return (255, 77, 0)
-
-
-def SKYBLUE():
-    return (117, 187, 253)
-
-
-def BERLIN_LAZUR():
-    return (0, 49, 83)
-
-
-def LUMINESCENTRED():
-    return (248, 0, 0)
+def grey():
+    return 0x7D7D7D
