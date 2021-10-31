@@ -1,5 +1,4 @@
-from coms import Ball, Gun, Target, Game_Master
-from Colors import white, black, grey
+from coms import GameMaster
 import pygame
 
 
@@ -14,7 +13,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 clock = pygame.time.Clock()
 
-GG = Game_Master(screen)
+GG = GameMaster(screen)
 
 while not GG.finished:
     GG.update()
