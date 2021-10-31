@@ -3,6 +3,7 @@ from random import choice
 import pygame
 from Colors import game_colors, black, grey, white, red
 from random import randint
+from GraphComs import turn
 
 
 class Ball:
@@ -94,7 +95,12 @@ class Gun:
 
     def draw(self):
         # FIXIT don't know how to do it
-        pygame.draw.circle(self.screen, black(), (self.x, self.y), self.f2_power)
+        coordinates = [turn(coo, self.an) for coo in [(-10, -3),
+                                                      (self.f2_power, -3),
+                                                      (self.f2_power, 3),
+                                                      (-10, 3)]]
+        coordinates = [(i[0] + 20, i[1] + 450) for i in coordinates]
+        pygame.draw.polygon(self.screen, black(), coordinates)
 
     def power_up(self):
         if self.f2_on:

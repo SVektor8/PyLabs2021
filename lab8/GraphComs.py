@@ -1,3 +1,6 @@
+import math
+
+
 def trans(Height, Width, BoxHeight, BoxWidth, coords):
     '''
     Function transforms coordinats from one system to another, which is bounded
@@ -24,3 +27,22 @@ def distance(pos1, pos2):
         x-coordinate of the dot, second number -- y-coordinate
     '''
     return ((pos1[0] - pos2[0]) ** 2 + (pos1[1] - pos2[1]) ** 2) ** 0.5
+
+
+def turn(coo, angle):
+    x, y = coo[0], coo[1]
+
+    r = (x ** 2 + y ** 2) ** 0.5
+
+    if x != 0:
+        angle = math.atan(y / x) + angle
+    else:
+        angle = math.pi / 2 - (y < 0) * math.pi + angle
+
+    if (x < 0) * (y < 0) \
+            or (x / abs(x) == -1) * (y / abs(y) == 1):
+        angle = angle - math.pi
+
+    x, y = r * math.cos(angle), r * math.sin(angle)
+
+    return (x, y)
