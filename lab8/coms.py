@@ -298,6 +298,7 @@ class GameMaster:
 
         # moving, checking collisions, etc.
         for b in self.balls:
+
             b.move()
             for target in self.targets:
                 if b.hit_test(target):
