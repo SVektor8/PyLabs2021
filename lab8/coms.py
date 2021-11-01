@@ -304,6 +304,7 @@ class GameMaster:
                     target.hit()
                     target.new_target()
         self.armor.power_up()
+        self.armor.move()
 
         # catching events
         for event in pygame.event.get():
@@ -315,6 +316,16 @@ class GameMaster:
                 self.armor.fire2_end(event)
             elif event.type == pygame.MOUSEMOTION:
                 self.armor.aiming(event)
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    self.armor.speed_x = -self.armor.max_speed
+                elif event.key == pygame.K_RIGHT:
+                    self.armor.speed_x = self.armor.max_speed
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT:
+                    self.armor.speed_x = 0
+                elif event.key == pygame.K_RIGHT:
+                    self.armor.speed_x = 0
 
     def draw(self):
         """
