@@ -1,7 +1,7 @@
 import math
 from random import choice
 import pygame
-from Colors import game_colors, white, red
+from Colors import game_colors, white, red, black
 from random import randint
 from GraphComs import turn, distance
 
@@ -181,7 +181,7 @@ class Gun:
 
         # drawing
         pygame.draw.polygon(self.screen,
-                            (self.f2_power * 3 - 10, self.f2_power, self.f2_power),
+                            (self.f2_power * 3, self.f2_power, self.f2_power),
                             coordinates)
 
     def power_up(self):
@@ -189,7 +189,7 @@ class Gun:
         Making shot more powerful by lengthening the gun and making shells faster
         """
         if self.f2_on:
-            if self.f2_power < 85:
+            if self.f2_power < 42:
                 self.f2_power += 1
 
 
@@ -216,15 +216,7 @@ class GameMaster:
         """
         Updates objects on the screen and draws them
         """
-        # draws
-        self.screen.fill(white())
-
-        self.gun.draw()
-        self.target.draw()
-        for b in self.balls:
-            b.draw()
-
-        pygame.display.update()
+        self.draw()
 
         # moving, checking collisions, etc.
         for b in self.balls:
@@ -244,3 +236,21 @@ class GameMaster:
                 self.gun.fire2_end(event)
             elif event.type == pygame.MOUSEMOTION:
                 self.gun.aiming(event)
+
+    def draw(self):
+        """
+        Draws on the screen
+        """
+        self.screen.fill(white())
+
+        self.gun.draw()
+        self.target.draw()
+        for b in self.balls:
+            b.draw()
+
+        score_text = pygame.font.Font(None, 36).render('Score: '
+                                                       + str(int(self.target.points)),
+                                                       True, black())
+        self.screen.blit(score_text, (10, 10))
+
+        pygame.display.update()
