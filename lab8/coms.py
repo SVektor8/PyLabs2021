@@ -1,7 +1,7 @@
 import math
 from random import choice
 import pygame
-from Colors import game_colors, white, red, black
+from Colors import game_colors, white, red, black, DARKKHAKI, OLIVE
 from random import randint
 from GraphComs import turn, distance
 
@@ -87,17 +87,19 @@ class Shell(Ball):
 
 
 class Target(Ball):
-    def __init__(self, screen):
+    def __init__(self, screen, game):
         """
         Constructor of class Target
 
             Args:
                 screen: screen, where the target will be drawn
+                game: GameMaster object, where current game is launched
         """
         super().__init__(screen, 26)
 
         self.points = 0  # summary points of the player
         self.color = red()
+        self.game = game
 
         self.new_target()
 
@@ -105,15 +107,16 @@ class Target(Ball):
         """
         Initialization of a new target
         """
-        self.x = randint(600, 780)
-        self.y = randint(300, 550)
-        self.r = randint(7, 50)
+        self.x = randint(400, 780)
+        self.y = randint(200, 550)
+        self.r = randint(7, 40)
 
     def hit(self, points=1):
         """
         Shell terminates the target
         """
-        self.points += points
+        self.game.points += points
+        self.game.level += points / self.game.level
 
 
 class Gun:
@@ -132,6 +135,9 @@ class Gun:
         self.x = 20
         self.y = 450
         self.game = game
+        self.max_speed = 0
+        self.speed_x = 0
+        self.speed_y = 0
 
     def fire2_start(self):
         """
@@ -146,7 +152,7 @@ class Gun:
         """
         self.game.bullet += 1
 
-        new_ball = Shell(self.screen)  # shell is launched
+        new_ball = Shell(self.screen, x=self.x, y=self.y)  # shell is launched
         new_ball.r += 5
 
         # calculating angle
@@ -160,13 +166,14 @@ class Gun:
         self.game.balls.append(new_ball)
         self.f2_on = 0
         self.f2_power = 10
+        self.new_ball = new_ball
 
     def aiming(self, event):
         """
         Aiming, depends on mouse position
         """
         if event:
-            self.an = math.atan((event.pos[1] - 450) / (event.pos[0] - 20))
+            self.an = math.atan((event.pos[1] - self.y) / (event.pos[0] - self.x))
 
     def draw(self):
         """
@@ -177,7 +184,7 @@ class Gun:
                                                       (self.f2_power, -3),
                                                       (self.f2_power, 3),
                                                       (-10, 3)]]
-        coordinates = [(i[0] + 20, i[1] + 450) for i in coordinates]
+        coordinates = [(i[0] + self.x, i[1] + self.y) for i in coordinates]
 
         # drawing
         pygame.draw.polygon(self.screen,
@@ -192,6 +199,75 @@ class Gun:
             if self.f2_power < 42:
                 self.f2_power += 1
 
+    def move(self):
+        self.x += self.speed_x
+        self.y += self.speed_y
+
+
+class Tank(Gun):
+    def __init__(self, screen, game):
+        super().__init__(screen, game)
+        self.x = 100
+        self.y = 450
+        self.max_speed = 2
+        self.speed = 0
+
+    def draw(self):
+        coordinates = [turn(coo, self.an) for coo in [(-10, -1.5),
+                                                      (self.f2_power + 36, -1.5),
+                                                      (self.f2_power + 36, 1.5),
+                                                      (-10, 1.5)]]
+        coordinates = [(i[0] + self.x, i[1] + self.y) for i in coordinates]
+
+        pygame.draw.polygon(self.screen,
+                            (self.f2_power * 3, self.f2_power, self.f2_power),
+                            coordinates)
+
+        coordinates = [turn(coo, 0) for coo in [(-42, 8),
+                                                (0, 8),
+                                                (-4, -6),
+                                                (-35, -8),
+                                                (-38, -1)]]
+        coordinates = [(i[0] + self.x, i[1] + self.y) for i in coordinates]
+
+        pygame.draw.polygon(self.screen,
+                            DARKKHAKI(),
+                            coordinates)
+
+        coordinates = [turn(coo, 0) for coo in [(-80, 8),
+                                                (30, 8),
+                                                (43, 18),
+                                                (27, 30),
+                                                (-70, 30)]]
+        coordinates = [(i[0] + self.x, i[1] + self.y) for i in coordinates]
+
+        pygame.draw.polygon(self.screen,
+                            DARKKHAKI(),
+                            coordinates)
+
+    def aiming(self, event):
+        """
+        Aiming, depends on mouse position
+        """
+        angle = math.pi / 4.5
+        if event:
+            try:
+                angle = math.atan((event.pos[1] - self.y) / (event.pos[0] - self.x))
+            except:
+                self.an = math.pi / 4.5
+            finally:
+                if abs(angle) < math.pi / 4.5:
+                    self.an = angle
+                else:
+                    self.an = math.pi / 4.5 * angle / abs(angle)
+
+    def fire2_end(self, event):
+        super().fire2_end(event)
+        self.new_ball.r = 3
+        self.new_ball.color = OLIVE()
+        self.new_ball.speed_x *= 2.5
+        self.new_ball.speed_y *= 2.5
+
 
 class GameMaster:
     def __init__(self, screen):
@@ -205,9 +281,11 @@ class GameMaster:
 
         # initialization of quantity of bullets(shells), balls, gun, target
         self.bullet = 0
+        self.points = 0
         self.balls = []
-        self.gun = Gun(screen, self)
-        self.target = Target(screen)
+        self.armor = Tank(screen, self)
+        self.targets = [Target(screen, self) for i in range(2)]
+        self.level = 1
 
         # finishing game marker
         self.finished = False
@@ -221,21 +299,22 @@ class GameMaster:
         # moving, checking collisions, etc.
         for b in self.balls:
             b.move()
-            if b.hit_test(self.target):
-                self.target.hit()
-                self.target.new_target()
-        self.gun.power_up()
+            for target in self.targets:
+                if b.hit_test(target):
+                    target.hit()
+                    target.new_target()
+        self.armor.power_up()
 
         # catching events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.finished = True
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                self.gun.fire2_start()
+                self.armor.fire2_start()
             elif event.type == pygame.MOUSEBUTTONUP:
-                self.gun.fire2_end(event)
+                self.armor.fire2_end(event)
             elif event.type == pygame.MOUSEMOTION:
-                self.gun.aiming(event)
+                self.armor.aiming(event)
 
     def draw(self):
         """
@@ -243,14 +322,28 @@ class GameMaster:
         """
         self.screen.fill(white())
 
-        self.gun.draw()
-        self.target.draw()
+        self.armor.draw()
+        for target in self.targets:
+            target.draw()
         for b in self.balls:
             b.draw()
 
         score_text = pygame.font.Font(None, 36).render('Score: '
-                                                       + str(int(self.target.points)),
+                                                       + str(int(self.points)),
                                                        True, black())
         self.screen.blit(score_text, (10, 10))
+
+        level_text = pygame.font.Font(None, 36).render('Level: '
+                                                       + str(int(self.level)),
+                                                       True, black())
+        self.screen.blit(level_text, (10, 30))
+
+        percent = int((self.level - int(self.level)) * 100)
+
+        percent_text = pygame.font.Font(None, 36).render('     '
+                                                         + str(percent)
+                                                         + '%',
+                                                         True, black())
+        self.screen.blit(percent_text, (10, 50))
 
         pygame.display.update()
