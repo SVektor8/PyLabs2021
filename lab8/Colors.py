@@ -1,3 +1,5 @@
+# Module with colors
+
 def game_colors():
     return [red(), blue(), yellow(), green(), magenta(), cyan()]
 
