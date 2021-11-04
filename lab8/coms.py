@@ -1,7 +1,7 @@
 import math
 from random import choice
 import pygame
-from Colors import game_colors, white, red, black, DARKKHAKI, OLIVE
+from Colors import game_colors, white, red, black, DARKKHAKI, OLIVE, SKYBLUE
 from random import randint
 from GraphComs import turn, distance
 
@@ -25,6 +25,7 @@ class Ball:
         self.speed_y = 0
         self.acceleration_x = 0
         self.acceleration_y = 0
+        self.max_speed = 1000
 
     def move(self):
         """
@@ -37,8 +38,15 @@ class Ball:
         self.x += self.speed_x + self.acceleration_x / 2
         self.y += self.speed_y + self.acceleration_y / 2
 
-        self.speed_x += self.acceleration_x
-        self.speed_y += self.acceleration_y
+        if ((self.speed_x + self.acceleration_x) ** 2
+            + (self.speed_y + self.acceleration_y) ** 2) ** 0.5 \
+                <= self.max_speed:
+            self.speed_x += self.acceleration_x
+            self.speed_y += self.acceleration_y
+        else:
+            k = self.max_speed / (self.speed_x ** 2 + self.speed_y ** 2) ** 0.5
+            self.speed_x *= k
+            self.speed_y *= k
 
     def draw(self):
         """
@@ -118,8 +126,11 @@ class Target(Ball):
         self.game.points += points
         self.game.level += points / self.game.level
 
+        if self.game.level >= 3:
+            self.game.level += 0.15
 
-class Gun:
+
+class Gun(Ball):
     def __init__(self, screen, game):
         """
         Constructor of class Gun
@@ -128,16 +139,13 @@ class Gun:
                 screen: screen, where the ball will be drawn
                 game: GameMaster object, where current game is launched
         """
-        self.screen = screen
+        super().__init__(screen, -1)
         self.f2_power = 10  # shot power
         self.f2_on = 0  # signal to a shot
         self.an = 1  # current angle between start speed of a shell and horizontal line
         self.x = 20
         self.y = 450
         self.game = game
-        self.max_speed = 0
-        self.speed_x = 0
-        self.speed_y = 0
 
     def fire2_start(self):
         """
@@ -200,8 +208,9 @@ class Gun:
                 self.f2_power += 1
 
     def move(self):
-        self.x += self.speed_x
-        self.y += self.speed_y
+        super().move()
+
+        self.x %= 800
 
 
 class Tank(Gun):
@@ -209,7 +218,7 @@ class Tank(Gun):
         super().__init__(screen, game)
         self.x = 100
         self.y = 450
-        self.max_speed = 2
+        self.max_speed = 10
         self.speed = 0
 
     def draw(self):
@@ -269,6 +278,112 @@ class Tank(Gun):
         self.new_ball.speed_y *= 2.5
 
 
+class Plane(Gun):
+    def __init__(self, screen, game):
+        super().__init__(screen, game)
+        self.x = 100
+        self.y = 250
+        self.speed_x = 8
+        self.speed_y = -14
+        self.max_speed = 50
+        self.acceleration_y = 1
+        self.speed = 0
+
+    def draw(self):
+
+        coordinates = [(-60, -15, 120, 25)]
+        coordinates = [(i[0] + self.x, i[1] + self.y, i[2], i[3]) for i in coordinates]
+
+        pygame.draw.ellipse(self.screen, black(), coordinates[0])
+
+        coordinates = [(-48, -40, 20, 47)]
+        coordinates = [(i[0] + self.x, i[1] + self.y, i[2], i[3]) for i in coordinates]
+
+        pygame.draw.ellipse(self.screen, black(), coordinates[0])
+
+        coordinates = [(55, -7)]
+        coordinates = [(i[0] + self.x, i[1] + self.y) for i in coordinates]
+
+        pygame.draw.circle(self.screen, SKYBLUE(), coordinates[0], 5)
+
+    def aiming(self, event):
+        """
+        Aiming, depends on mouse position
+        """
+        angle = math.pi / 4.5
+        if event:
+            try:
+                angle = math.atan((event.pos[1] - self.y) / (event.pos[0] - self.x))
+            except:
+                self.an = math.pi / 4.5
+            finally:
+                if abs(angle) < math.pi / 4.5 and 0:
+                    self.an = angle
+                else:
+                    self.an = math.pi / 4.5 * angle / abs(angle)
+
+    def fire2_end(self, event):
+        super().fire2_end(event)
+        self.new_ball.r = 12
+        self.new_ball.color = black()
+        self.new_ball.speed_x = self.speed_x
+        self.new_ball.speed_y = self.speed_y
+        self.new_ball.acceleration_y = 1
+
+
+class Helicopter(Gun):
+    def __init__(self, screen, game):
+        super().__init__(screen, game)
+        self.x = 100
+        self.y = 250
+        self.speed_x = 8
+        self.speed_y = -14
+        self.max_speed = 50
+        self.acceleration_y = 1
+        self.speed = 0
+
+    def draw(self):
+
+        coordinates = [(-60, -15, 120, 25)]
+        coordinates = [(i[0] + self.x, i[1] + self.y, i[2], i[3]) for i in coordinates]
+
+        pygame.draw.ellipse(self.screen, black(), coordinates[0])
+
+        coordinates = [(-48, -40, 20, 47)]
+        coordinates = [(i[0] + self.x, i[1] + self.y, i[2], i[3]) for i in coordinates]
+
+        pygame.draw.ellipse(self.screen, black(), coordinates[0])
+
+        coordinates = [(55, -7)]
+        coordinates = [(i[0] + self.x, i[1] + self.y) for i in coordinates]
+
+        pygame.draw.circle(self.screen, SKYBLUE(), coordinates[0], 5)
+
+    def aiming(self, event):
+        """
+        Aiming, depends on mouse position
+        """
+        angle = math.pi / 4.5
+        if event:
+            try:
+                angle = math.atan((event.pos[1] - self.y) / (event.pos[0] - self.x))
+            except:
+                self.an = math.pi / 4.5
+            finally:
+                if abs(angle) < math.pi / 4.5 and 0:
+                    self.an = angle
+                else:
+                    self.an = math.pi / 4.5 * angle / abs(angle)
+
+    def fire2_end(self, event):
+        super().fire2_end(event)
+        self.new_ball.r = 12
+        self.new_ball.color = black()
+        self.new_ball.speed_x = self.speed_x
+        self.new_ball.speed_y = self.speed_y
+        self.new_ball.acceleration_y = 1
+
+
 class GameMaster:
     def __init__(self, screen):
         """
@@ -283,7 +398,7 @@ class GameMaster:
         self.bullet = 0
         self.points = 0
         self.balls = []
-        self.armor = Tank(screen, self)
+        self.armor = Gun(screen, self)
         self.targets = [Target(screen, self) for i in range(2)]
         self.level = 1
 
@@ -295,6 +410,11 @@ class GameMaster:
         Updates objects on the screen and draws them
         """
         self.draw()
+
+        if 3 <= self.level < 5 and type(self.armor) != Tank:
+            self.armor = Tank(self.screen, self)
+        elif 5 <= self.level < 1000 and type(self.armor) != Plane:
+            self.armor = Plane(self.screen, self)
 
         # moving, checking collisions, etc.
         for b in self.balls:
@@ -319,14 +439,24 @@ class GameMaster:
                 self.armor.aiming(event)
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    self.armor.speed_x = -self.armor.max_speed
+                    if type(self.armor) == Tank:
+                        self.armor.acceleration_x = -0.3
                 elif event.key == pygame.K_RIGHT:
-                    self.armor.speed_x = self.armor.max_speed
+                    if type(self.armor) == Tank:
+                        self.armor.acceleration_x = 0.5
+                elif event.key == pygame.K_UP:
+                    if type(self.armor) == Plane:
+                        self.armor.acceleration_y -= 2.3
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
-                    self.armor.speed_x = 0
+                    if type(self.armor) == Tank:
+                        self.armor.acceleration_xx = 0
                 elif event.key == pygame.K_RIGHT:
-                    self.armor.speed_x = 0
+                    if type(self.armor) == Tank:
+                        self.armor.acceleration_x = 0
+                elif event.key == pygame.K_UP:
+                    if type(self.armor) == Plane:
+                        self.armor.acceleration_y += 2.3
 
     def draw(self):
         """
@@ -341,7 +471,9 @@ class GameMaster:
             b.draw()
 
         score_text = pygame.font.Font(None, 36).render('Score: '
-                                                       + str(int(self.points)),
+                                                       + str(int(self.points))
+                                                       + '         '
+                                                       + 'Upgrades at levels: 1, 3, 5',
                                                        True, black())
         self.screen.blit(score_text, (10, 10))
 
