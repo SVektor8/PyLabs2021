@@ -1,7 +1,7 @@
 import math
 from random import choice
 import pygame
-from Colors import game_colors, white, red, black, DARKKHAKI, OLIVE, SKYBLUE
+from Colors import game_colors, white, red, black, DARKKHAKI, OLIVE, SKYBLUE, BLUE
 from random import randint
 from GraphComs import turn, distance
 
@@ -50,7 +50,7 @@ class Ball:
 
     def draw(self):
         """
-        Draws the ball on the screen self.screen
+        Draws the ball on the screen self.screen like a circle
         """
         pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.r)
 
@@ -109,7 +109,7 @@ class Target(Ball):
         self.color = red()
         self.game = game
 
-        self.new_target()
+        self.new_target()  # initialization of start target
 
     def new_target(self):
         """
@@ -123,8 +123,9 @@ class Target(Ball):
         """
         Shell terminates the target
         """
-        self.game.points += points
-        self.game.level += points / self.game.level
+        self.game.points += points  # updating points
+
+        self.game.level += points / self.game.level  # updating level
 
         if self.game.level >= 3:
             self.game.level += 0.15
@@ -208,20 +209,37 @@ class Gun(Ball):
                 self.f2_power += 1
 
     def move(self):
+        """
+        Moves the gun; it can't go outside of the screen
+        """
+
         super().move()
 
         self.x %= 800
 
 
 class Tank(Gun):
+    """Child gun class; is drawn like a tank, has faster shells of less caliber"""
+
     def __init__(self, screen, game):
+        """
+        Constructor of class Gun
+            Args:
+                screen: screen, where the ball will be drawn
+                game: GameMaster object, where current game is launched
+        """
         super().__init__(screen, game)
+
+        # defining start tank parameters
         self.x = 100
         self.y = 450
         self.max_speed = 10
-        self.speed = 0
 
     def draw(self):
+        """
+        Drawing the object like a tank not like usual gun
+        """
+        # gun
         coordinates = [turn(coo, self.an) for coo in [(-10, -1.5),
                                                       (self.f2_power + 36, -1.5),
                                                       (self.f2_power + 36, 1.5),
@@ -232,6 +250,7 @@ class Tank(Gun):
                             (self.f2_power * 3, self.f2_power, self.f2_power),
                             coordinates)
 
+        # turret
         coordinates = [turn(coo, 0) for coo in [(-42, 8),
                                                 (0, 8),
                                                 (-4, -6),
@@ -243,6 +262,7 @@ class Tank(Gun):
                             DARKKHAKI(),
                             coordinates)
 
+        # body
         coordinates = [turn(coo, 0) for coo in [(-80, 8),
                                                 (30, 8),
                                                 (43, 18),
@@ -271,6 +291,9 @@ class Tank(Gun):
                     self.an = math.pi / 4.5 * angle / abs(angle)
 
     def fire2_end(self, event):
+        """
+        Correcting parameters of new shell due to tank features
+        """
         super().fire2_end(event)
         self.new_ball.r = 3
         self.new_ball.color = OLIVE()
@@ -279,29 +302,42 @@ class Tank(Gun):
 
 
 class Plane(Gun):
+    """Child gun class; is drawn like a plane, has smth like bombs with the same
+    start speed as a plane itself"""
+
     def __init__(self, screen, game):
+        """
+        Constructor of class Gun
+            Args:
+                screen: screen, where the ball will be drawn
+                game: GameMaster object, where current game is launched
+        """
         super().__init__(screen, game)
+
+        # Defining plane's parameters
         self.x = 100
         self.y = 250
         self.speed_x = 8
         self.speed_y = -14
         self.max_speed = 50
         self.acceleration_y = 1
-        self.speed = 0
 
     def draw(self):
+        """
+        Drawing the object like a plane not like usual gun
+        """
 
-        coordinates = [(-60, -15, 120, 25)]
+        coordinates = [(-60, -15, 120, 25)]  # body
         coordinates = [(i[0] + self.x, i[1] + self.y, i[2], i[3]) for i in coordinates]
 
         pygame.draw.ellipse(self.screen, black(), coordinates[0])
 
-        coordinates = [(-48, -40, 20, 47)]
+        coordinates = [(-48, -40, 20, 47)]  # rear of the plane
         coordinates = [(i[0] + self.x, i[1] + self.y, i[2], i[3]) for i in coordinates]
 
         pygame.draw.ellipse(self.screen, black(), coordinates[0])
 
-        coordinates = [(55, -7)]
+        coordinates = [(55, -7)]  # window
         coordinates = [(i[0] + self.x, i[1] + self.y) for i in coordinates]
 
         pygame.draw.circle(self.screen, SKYBLUE(), coordinates[0], 5)
@@ -323,6 +359,9 @@ class Plane(Gun):
                     self.an = math.pi / 4.5 * angle / abs(angle)
 
     def fire2_end(self, event):
+        """
+        Correcting parameters of new shell due to tank features
+        """
         super().fire2_end(event)
         self.new_ball.r = 12
         self.new_ball.color = black()
@@ -330,58 +369,17 @@ class Plane(Gun):
         self.new_ball.speed_y = self.speed_y
         self.new_ball.acceleration_y = 1
 
-
-class Helicopter(Gun):
-    def __init__(self, screen, game):
-        super().__init__(screen, game)
-        self.x = 100
-        self.y = 250
-        self.speed_x = 8
-        self.speed_y = -14
-        self.max_speed = 50
-        self.acceleration_y = 1
-        self.speed = 0
-
-    def draw(self):
-
-        coordinates = [(-60, -15, 120, 25)]
-        coordinates = [(i[0] + self.x, i[1] + self.y, i[2], i[3]) for i in coordinates]
-
-        pygame.draw.ellipse(self.screen, black(), coordinates[0])
-
-        coordinates = [(-48, -40, 20, 47)]
-        coordinates = [(i[0] + self.x, i[1] + self.y, i[2], i[3]) for i in coordinates]
-
-        pygame.draw.ellipse(self.screen, black(), coordinates[0])
-
-        coordinates = [(55, -7)]
-        coordinates = [(i[0] + self.x, i[1] + self.y) for i in coordinates]
-
-        pygame.draw.circle(self.screen, SKYBLUE(), coordinates[0], 5)
-
-    def aiming(self, event):
+    def move(self):
         """
-        Aiming, depends on mouse position
+        Moves the plane due to it's features: it can both fly and fall to the ground
         """
-        angle = math.pi / 4.5
-        if event:
-            try:
-                angle = math.atan((event.pos[1] - self.y) / (event.pos[0] - self.x))
-            except:
-                self.an = math.pi / 4.5
-            finally:
-                if abs(angle) < math.pi / 4.5 and 0:
-                    self.an = angle
-                else:
-                    self.an = math.pi / 4.5 * angle / abs(angle)
-
-    def fire2_end(self, event):
-        super().fire2_end(event)
-        self.new_ball.r = 12
-        self.new_ball.color = black()
-        self.new_ball.speed_x = self.speed_x
-        self.new_ball.speed_y = self.speed_y
-        self.new_ball.acceleration_y = 1
+        super().move()
+        if self.y >= 450:
+            self.speed_x = 0
+            self.speed_y = 0
+            self.y = 450
+        else:
+            self.speed_x = 8
 
 
 class GameMaster:
@@ -413,7 +411,7 @@ class GameMaster:
 
         if 3 <= self.level < 5 and type(self.armor) != Tank:
             self.armor = Tank(self.screen, self)
-        elif 5 <= self.level < 1000 and type(self.armor) != Plane:
+        elif 5 <= self.level < 7 and type(self.armor) != Plane:
             self.armor = Plane(self.screen, self)
 
         # moving, checking collisions, etc.
@@ -428,6 +426,12 @@ class GameMaster:
         self.armor.move()
 
         # catching events
+        self.events()
+
+    def events(self):
+        """
+        Checks events and changes objects' acceleration etc.
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.finished = True
@@ -441,6 +445,7 @@ class GameMaster:
                 if event.key == pygame.K_LEFT:
                     if type(self.armor) == Tank:
                         self.armor.acceleration_x = -0.3
+
                 elif event.key == pygame.K_RIGHT:
                     if type(self.armor) == Tank:
                         self.armor.acceleration_x = 0.5
@@ -449,10 +454,10 @@ class GameMaster:
                         self.armor.acceleration_y -= 2.3
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
-                    if type(self.armor) == Tank:
+                    if type(self.armor) in [Tank]:
                         self.armor.acceleration_xx = 0
                 elif event.key == pygame.K_RIGHT:
-                    if type(self.armor) == Tank:
+                    if type(self.armor) in [Tank]:
                         self.armor.acceleration_x = 0
                 elif event.key == pygame.K_UP:
                     if type(self.armor) == Plane:
