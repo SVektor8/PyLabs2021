@@ -2,7 +2,8 @@ import math
 import datetime
 import pygame
 from random import choice, randrange
-from Colors import game_colors, white, red, black, DARKKHAKI, OLIVE, SKYBLUE, GRAY, WHITE
+from Colors import game_colors, white, red, black, DARKKHAKI
+from Colors import BERLIN_LAZUR, OLIVE, SKYBLUE, GRAY, WHITE
 from random import randint
 from GraphComs import turn, distance
 
@@ -418,7 +419,6 @@ class Plane(Gun):
 
 
 class GameMaster:
-    score = 0
     highscore = -1
     username = 'admin'
     logged = False
@@ -453,6 +453,7 @@ class GameMaster:
         Updates objects on the screen and draws them
         """
         self.draw()
+        self.write_stats()
 
         if 3 <= self.level < 5 and type(self.armor) != Tank:
             self.armor = Tank(self.screen, self)
@@ -541,25 +542,8 @@ class GameMaster:
         for b in self.balls:
             b.draw()
 
-        score_text = pygame.font.Font(None, 36).render('Score: '
-                                                       + str(int(self.points))
-                                                       + '         '
-                                                       + 'Upgrades at levels: 1, 3, 5',
-                                                       True, black())
-        self.screen.blit(score_text, (10, 10))
-
-        level_text = pygame.font.Font(None, 36).render('Level: '
-                                                       + str(int(self.level)),
-                                                       True, black())
-        self.screen.blit(level_text, (10, 30))
-
-        percent = int((self.level - int(self.level)) * 100)
-
-        percent_text = pygame.font.Font(None, 36).render('     '
-                                                         + str(percent)
-                                                         + '%',
-                                                         True, black())
-        self.screen.blit(percent_text, (10, 50))
+        self.draw_score()
+        self.draw_stats()
 
         pygame.display.update()
 
@@ -585,6 +569,7 @@ class GameMaster:
         Updates users' statistics
         """
         is_new = True
+        self.highscore = max(self.points, self.highscore)
 
         with open(self.database_path, 'r') as f:  # reading old statistics
             loaded = [i.split() for i in f.read().splitlines()]
@@ -603,6 +588,41 @@ class GameMaster:
                 for j in i:
                     f.write(j + ' ')
                 f.write('\n')
+
+    def draw_stats(self):
+        # Writing rating list
+
+        with open(self.database_path, 'r') as f:  # reading data
+            loaded = [i.split() for i in f.read().splitlines()]
+        del loaded[0]
+        loaded = sorted(loaded, key=lambda x: x[1], reverse=True)  # sorting data
+
+        for i, string in enumerate(loaded):  # writing each rank
+            text = pygame.font.Font(None, 24).render(str(i + 1) + '. ' + string[0] +
+                                                     ' ' + string[1],
+                                                     True, BERLIN_LAZUR())
+            self.screen.blit(text, (500, 10 + i * 20))
+
+    def draw_score(self):
+        score_text = pygame.font.Font(None, 36).render('Score: '
+                                                       + str(int(self.points))
+                                                       + '         '
+                                                       + 'Upgrades at levels: 1, 3, 5',
+                                                       True, black())
+        self.screen.blit(score_text, (10, 10))
+
+        level_text = pygame.font.Font(None, 36).render('Level: '
+                                                       + str(int(self.level)),
+                                                       True, black())
+        self.screen.blit(level_text, (10, 30))
+
+        percent = int((self.level - int(self.level)) * 100)
+
+        percent_text = pygame.font.Font(None, 36).render('     '
+                                                         + str(percent)
+                                                         + '%',
+                                                         True, black())
+        self.screen.blit(percent_text, (10, 50))
 
 
 class EventLogger:
