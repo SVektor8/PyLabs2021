@@ -1,7 +1,7 @@
 import math
-from random import choice
+from random import choice, randrange
 import pygame
-from Colors import game_colors, white, red, black, DARKKHAKI, OLIVE, SKYBLUE, BLUE
+from Colors import game_colors, white, red, black, DARKKHAKI, OLIVE, SKYBLUE
 from random import randint
 from GraphComs import turn, distance
 
@@ -35,6 +35,7 @@ class Ball:
         speed self.speed_x and self.speed_y due to speed and
         acceleration self.acceleration_x and self.acceleration_y
         """
+
         self.x += self.speed_x + self.acceleration_x / 2
         self.y += self.speed_y + self.acceleration_y / 2
 
@@ -129,6 +130,39 @@ class Target(Ball):
 
         if self.game.level >= 3:
             self.game.level += 0.15
+
+
+class MovingTarget(Target):
+    def __init__(self, screen, game):
+        """
+        Constructor of class Target
+
+            Args:
+                screen: screen, where the target will be drawn
+                game: GameMaster object, where current game is launched
+        """
+        super().__init__(screen, game)
+        self.speed_x = randrange(5, 10)
+        self.speed_y = randrange(5, 10)
+
+    def new_target(self):
+        """
+        Initialization of a new target
+        """
+        super().new_target()
+
+        self.speed_x = randrange(1, 10)
+        self.speed_y = randrange(1, 10)
+
+    def move(self):
+        """
+        Moving the target; if it it touches the window border, it will go back
+        """
+        super().move()
+        if not 0 < self.x < 800:
+            self.speed_x *= -1
+        if not 0 < self.y < 600:
+            self.speed_y *= -1
 
 
 class Gun(Ball):
@@ -397,7 +431,7 @@ class GameMaster:
         self.points = 0
         self.balls = []
         self.armor = Gun(screen, self)
-        self.targets = [Target(screen, self) for i in range(2)]
+        self.targets = [Target(screen, self), MovingTarget(screen, self)]
         self.level = 1
 
         # finishing game marker
@@ -424,6 +458,9 @@ class GameMaster:
                     target.new_target()
         self.armor.power_up()
         self.armor.move()
+
+        for i in self.targets:
+            i.move()
 
         # catching events
         self.events()

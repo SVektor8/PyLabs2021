@@ -1,0 +1,73 @@
+2021-11-05 23:15:40.442091 EventLogger initialized
+2021-11-05 23:15:42.269429 Pushed Button ENTER
+2021-11-05 23:15:42.275431 User logged as admin
+2021-11-05 23:15:42.278433 Game restarted
+2021-11-05 23:15:42.428471 Released Button ENTER
+2021-11-05 23:15:43.977118 Pushed LeftMouseButton  at 943 291
+2021-11-05 23:15:44.913351 Pushed LeftMouseButton  at 922 317
+2021-11-05 23:15:46.083645 Pushed LeftMouseButton  at 849 348
+2021-11-05 23:15:47.045888 Pushed LeftMouseButton  at 789 409
+2021-11-05 23:15:48.362831 Pushed LeftMouseButton  at 796 476
+2021-11-05 23:15:48.659908 Pushed LeftMouseButton  at 796 496
+2021-11-05 23:15:49.284067 Pushed LeftMouseButton  at 792 539
+2021-11-05 23:15:58.474005 Pushed Button W
+2021-11-05 23:15:59.170175 Released Button W
+2021-11-05 23:15:59.501264 Pushed Button W
+2021-11-05 23:16:05.053805 Released Button W
+2021-11-05 23:16:05.786132 Pushed Button Up arrow
+2021-11-05 23:16:07.253836 Released Button Up arrow
+2021-11-05 23:16:07.327852 Pushed Button Up arrow
+2021-11-05 23:16:07.420878 Released Button Up arrow
+2021-11-05 23:16:07.529002 Pushed Button Up arrow
+2021-11-05 23:16:07.566969 Released Button Up arrow
+2021-11-05 23:16:07.639031 Pushed Button Up arrow
+2021-11-05 23:16:07.746961 Released Button Up arrow
+2021-11-05 23:16:07.817979 Pushed Button Up arrow
+2021-11-05 23:16:07.886997 Released Button Up arrow
+2021-11-05 23:16:07.956014 Pushed Button Up arrow
+2021-11-05 23:16:08.066041 Released Button Up arrow
+2021-11-05 23:16:08.107055 Pushed Button Up arrow
+2021-11-05 23:16:08.209078 Released Button Up arrow
+2021-11-05 23:16:08.247087 Pushed Button Up arrow
+2021-11-05 23:16:08.362113 Released Button Up arrow
+2021-11-05 23:16:08.410128 Pushed Button Up arrow
+2021-11-05 23:16:08.669197 Released Button Up arrow
+2021-11-05 23:16:08.711204 Pushed Button Up arrow
+2021-11-05 23:16:08.855241 Released Button Up arrow
+2021-11-05 23:16:08.894350 Pushed Button Up arrow
+2021-11-05 23:16:09.004278 Released Button Up arrow
+2021-11-05 23:16:09.084298 Pushed Button Down arrow
+2021-11-05 23:16:09.188323 Released Button Down arrow
+2021-11-05 23:16:09.227334 Pushed Button Down arrow
+2021-11-05 23:16:09.341461 Released Button Down arrow
+2021-11-05 23:16:09.402379 Pushed Button Down arrow
+2021-11-05 23:16:09.524409 Released Button Down arrow
+2021-11-05 23:16:09.592528 Pushed Button Down arrow
+2021-11-05 23:16:09.698560 Released Button Down arrow
+2021-11-05 23:16:09.771571 Pushed Button Down arrow
+2021-11-05 23:16:09.854696 Released Button Down arrow
+2021-11-05 23:16:09.923611 Pushed Button Down arrow
+2021-11-05 23:16:09.993623 Released Button Down arrow
+2021-11-05 23:16:10.098653 Pushed Button Up arrow
+2021-11-05 23:16:10.201686 Released Button Up arrow
+2021-11-05 23:16:10.279696 Pushed Button Up arrow
+2021-11-05 23:16:10.425732 Released Button Up arrow
+2021-11-05 23:16:14.380503 Game restarted
+2021-11-05 23:16:18.650580 Pushed LeftMouseButton  at 692 469
+2021-11-05 23:16:18.928648 Pushed LeftMouseButton  at 689 660
+2021-11-05 23:16:19.173709 Pushed LeftMouseButton  at 687 660
+2021-11-05 23:16:19.393766 Pushed LeftMouseButton  at 687 660
+2021-11-05 23:16:20.274091 Pushed LeftMouseButton  at 678 442
+2021-11-05 23:16:20.501045 Pushed LeftMouseButton  at 637 469
+2021-11-05 23:16:20.711097 Pushed LeftMouseButton  at 632 507
+2021-11-05 23:16:20.989169 Pushed LeftMouseButton  at 625 594
+2021-11-05 23:16:21.517305 Pushed LeftMouseButton  at 838 474
+2021-11-05 23:16:21.769364 Pushed LeftMouseButton  at 763 495
+2021-11-05 23:16:22.238010 Pushed LeftMouseButton  at 656 415
+2021-11-05 23:16:22.631719 Pushed LeftMouseButton  at 813 472
+2021-11-05 23:16:22.880900 Pushed LeftMouseButton  at 815 472
+2021-11-05 23:16:23.528765 Pushed LeftMouseButton  at 674 410
+2021-11-05 23:16:24.906222 Pushed LeftMouseButton  at 829 312
+2021-11-05 23:16:25.195277 Pushed LeftMouseButton  at 830 320
+2021-11-05 23:16:25.415183 Pushed LeftMouseButton  at 821 361
+2021-11-05 23:16:28.410234 Game ended
