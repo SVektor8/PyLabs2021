@@ -168,3 +168,508 @@
 2021-10-25 11:07:56.043407 Game restarted
 2021-10-25 11:08:22.059756 Game restarted
 2021-10-25 11:08:48.059621 Game restarted
+2021-12-03 16:42:44.643782 EventLogger initialized
+2021-12-03 16:42:45.536985 Pushed LeftMouseButton  at 407 228
+2021-12-03 16:42:47.457080 Pushed LeftMouseButton  at 408 216
+2021-12-03 16:42:49.019576 Pushed LeftMouseButton  at 351 354
+2021-12-03 16:42:50.704002 Pushed LeftMouseButton  at 553 409
+2021-12-03 16:42:51.747160 Pushed Button Right arrow
+2021-12-03 16:42:51.882227 Released Button Right arrow
+2021-12-03 16:42:53.620628 Pushed LeftMouseButton  at 571 326
+2021-12-03 16:42:59.135213 Pushed LeftMouseButton  at 616 353
+2021-12-03 16:43:00.312024 Pushed LeftMouseButton  at 608 346
+2021-12-03 16:43:01.715480 Pushed LeftMouseButton  at 651 381
+2021-12-03 16:43:02.450565 Pushed LeftMouseButton  at 664 383
+2021-12-03 16:43:03.090727 Pushed LeftMouseButton  at 697 402
+2021-12-03 16:43:05.077232 Pushed Button Right arrow
+2021-12-03 16:43:05.178360 Released Button Right arrow
+2021-12-03 16:43:06.585612 Pushed LeftMouseButton  at 391 262
+2021-12-03 16:43:07.634872 Pushed LeftMouseButton  at 387 260
+2021-12-03 16:43:09.153255 Pushed Button Up arrow
+2021-12-03 16:43:09.530351 Released Button Up arrow
+2021-12-03 16:43:09.596365 Pushed Button Up arrow
+2021-12-03 16:43:09.758407 Released Button Up arrow
+2021-12-03 16:43:09.825432 Pushed Button Up arrow
+2021-12-03 16:43:09.922483 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:09.955459 Released Button Up arrow
+2021-12-03 16:43:10.056491 Pushed Button Up arrow
+2021-12-03 16:43:10.092492 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:10.196515 Released Button Up arrow
+2021-12-03 16:43:10.261533 Pushed Button Up arrow
+2021-12-03 16:43:10.294646 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:10.398250 Released Button Up arrow
+2021-12-03 16:43:10.999167 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:11.601215 Pushed Button Up arrow
+2021-12-03 16:43:11.635223 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:11.734249 Released Button Up arrow
+2021-12-03 16:43:11.832275 Pushed Button Up arrow
+2021-12-03 16:43:11.864286 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:11.967307 Released Button Up arrow
+2021-12-03 16:43:12.001315 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:12.003421 Pushed Button Up arrow
+2021-12-03 16:43:12.335402 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:12.599468 Released Button Up arrow
+2021-12-03 16:43:12.731594 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:12.732498 Pushed Button Up arrow
+2021-12-03 16:43:12.832539 Released Button Up arrow
+2021-12-03 16:43:12.965660 Pushed Button Up arrow
+2021-12-03 16:43:12.967561 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:13.098593 Released Button Up arrow
+2021-12-03 16:43:13.202617 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:13.203618 Pushed Button Up arrow
+2021-12-03 16:43:13.334763 Released Button Up arrow
+2021-12-03 16:43:14.047830 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:14.049831 Pushed Button Up arrow
+2021-12-03 16:43:14.184865 Released Button Up arrow
+2021-12-03 16:43:14.318114 Pushed Button Up arrow
+2021-12-03 16:43:14.385027 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:14.417250 Released Button Up arrow
+2021-12-03 16:43:14.552179 Pushed Button Up arrow
+2021-12-03 16:43:14.619573 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:14.653581 Released Button Up arrow
+2021-12-03 16:43:14.857761 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:14.925682 Pushed Button Up arrow
+2021-12-03 16:43:15.027284 Released Button Up arrow
+2021-12-03 16:43:15.162216 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:15.232234 Pushed Button Up arrow
+2021-12-03 16:43:15.366372 Released Button Up arrow
+2021-12-03 16:43:15.465292 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:15.567419 Pushed Button Up arrow
+2021-12-03 16:43:15.765369 Released Button Up arrow
+2021-12-03 16:43:15.766373 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:15.898401 Pushed Button Up arrow
+2021-12-03 16:43:15.963465 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:16.031435 Released Button Up arrow
+2021-12-03 16:43:16.130555 Pushed Button Up arrow
+2021-12-03 16:43:16.196478 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:16.263497 Released Button Up arrow
+2021-12-03 16:43:16.364520 Pushed Button Up arrow
+2021-12-03 16:43:16.433647 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:16.499556 Released Button Up arrow
+2021-12-03 16:43:16.566676 Pushed Button Up arrow
+2021-12-03 16:43:16.633704 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:16.898654 Released Button Up arrow
+2021-12-03 16:43:16.934761 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:16.965671 Pushed Button Up arrow
+2021-12-03 16:43:17.101710 Released Button Up arrow
+2021-12-03 16:43:17.169819 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:17.615867 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:17.617839 Pushed Button Up arrow
+2021-12-03 16:43:17.747971 Released Button Up arrow
+2021-12-03 16:43:18.419134 Pushed Button Up arrow
+2021-12-03 16:43:18.453054 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:18.554172 Released Button Up arrow
+2021-12-03 16:43:18.622110 Pushed Button Up arrow
+2021-12-03 16:43:18.658099 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:18.758125 Released Button Up arrow
+2021-12-03 16:43:18.827141 Pushed Button Up arrow
+2021-12-03 16:43:18.894163 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:18.959252 Released Button Up arrow
+2021-12-03 16:43:19.059201 Pushed Button Up arrow
+2021-12-03 16:43:19.162235 Released Button Up arrow
+2021-12-03 16:43:19.261250 Pushed Button Up arrow
+2021-12-03 16:43:19.398287 Released Button Up arrow
+2021-12-03 16:43:19.427294 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:19.493309 Pushed Button Up arrow
+2021-12-03 16:43:19.627341 Released Button Up arrow
+2021-12-03 16:43:19.697361 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:19.699364 Pushed Button Up arrow
+2021-12-03 16:43:19.825396 Released Button Up arrow
+2021-12-03 16:43:19.890409 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:19.924423 Pushed Button Up arrow
+2021-12-03 16:43:20.024442 Released Button Up arrow
+2021-12-03 16:43:20.127467 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:20.162478 Pushed Button Up arrow
+2021-12-03 16:43:20.261601 Released Button Up arrow
+2021-12-03 16:43:20.360526 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:20.428641 Pushed Button Up arrow
+2021-12-03 16:43:20.496663 Released Button Up arrow
+2021-12-03 16:43:21.176822 Pushed Button Up arrow
+2021-12-03 16:43:21.177823 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:21.310881 Released Button Up arrow
+2021-12-03 16:43:21.379783 Pushed Button Up arrow
+2021-12-03 16:43:21.412796 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:21.548928 Released Button Up arrow
+2021-12-03 16:43:21.615841 Pushed Button Up arrow
+2021-12-03 16:43:21.952924 Released Button Up arrow
+2021-12-03 16:43:21.988934 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:22.022945 Pushed Button Up arrow
+2021-12-03 16:43:22.155979 Released Button Up arrow
+2021-12-03 16:43:22.226996 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:22.259004 Pushed Button Up arrow
+2021-12-03 16:43:22.360026 Released Button Up arrow
+2021-12-03 16:43:22.427072 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:22.460149 Pushed Button Up arrow
+2021-12-03 16:43:22.561175 Released Button Up arrow
+2021-12-03 16:43:22.661200 Pushed Button Up arrow
+2021-12-03 16:43:22.695112 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:22.797135 Released Button Up arrow
+2021-12-03 16:43:22.864154 Pushed Button Up arrow
+2021-12-03 16:43:22.931170 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:22.996288 Released Button Up arrow
+2021-12-03 16:43:23.095211 Pushed Button Up arrow
+2021-12-03 16:43:23.130220 Pushed LeftMouseButton  at 605 416
+2021-12-03 16:43:23.196330 Released Button Up arrow
+2021-12-03 16:47:35.214271 EventLogger initialized
+2021-12-03 16:47:59.321118 EventLogger initialized
+2021-12-03 16:53:20.683571 EventLogger initialized
+2021-12-03 16:53:22.528651 Pushed Button BACKSPACE
+2021-12-03 16:53:22.657683 Released Button BACKSPACE
+2021-12-03 16:53:23.893003 Pushed Button BACKSPACE
+2021-12-03 16:53:24.102957 Released Button BACKSPACE
+2021-12-03 16:54:46.211004 EventLogger initialized
+2021-12-03 16:54:46.732657 Pushed Button BACKSPACE
+2021-12-03 16:54:46.836724 Released Button BACKSPACE
+2021-12-03 16:54:47.069830 Pushed Button BACKSPACE
+2021-12-03 16:54:47.152851 Released Button BACKSPACE
+2021-12-03 16:54:47.430918 Pushed Button BACKSPACE
+2021-12-03 16:54:47.513037 Released Button BACKSPACE
+2021-12-03 16:54:49.732598 Pushed Button m
+2021-12-03 16:54:49.916546 Released Button m
+2021-12-03 16:54:50.423682 Pushed Button e
+2021-12-03 16:54:50.586717 Released Button e
+2021-12-03 16:54:50.646733 Pushed Button e
+2021-12-03 16:54:50.780767 Released Button e
+2021-12-03 16:54:51.656991 Pushed Button n
+2021-12-03 16:54:51.879044 Released Button n
+2021-12-03 16:54:51.915053 Pushed Button 3
+2021-12-03 16:54:52.332177 Released Button 3
+2021-12-03 16:54:52.570221 Pushed Button 6
+2021-12-03 16:54:52.745263 Released Button 6
+2021-12-03 16:54:53.165369 Pushed Button ENTER
+2021-12-03 16:54:53.166371 User logged as admeen36
+2021-12-03 16:54:53.324409 Released Button ENTER
+2021-12-03 16:54:54.962817 Pushed LeftMouseButton  at 478 231
+2021-12-03 16:54:56.114107 Pushed LeftMouseButton  at 477 223
+2021-12-03 16:54:57.560472 Pushed LeftMouseButton  at 477 220
+2021-12-03 16:54:58.758780 Pushed LeftMouseButton  at 414 448
+2021-12-03 16:55:00.008097 Pushed LeftMouseButton  at 478 325
+2021-12-03 16:55:01.148986 Pushed LeftMouseButton  at 496 209
+2021-12-03 16:55:02.369294 Pushed LeftMouseButton  at 481 127
+2021-12-03 16:55:04.341220 Pushed LeftMouseButton  at 481 127
+2021-12-03 16:55:07.627423 Pushed LeftMouseButton  at 423 343
+2021-12-03 16:55:10.244134 Pushed LeftMouseButton  at 437 190
+2021-12-03 16:55:11.420430 Pushed LeftMouseButton  at 437 190
+2021-12-03 16:55:12.154677 Pushed LeftMouseButton  at 504 493
+2021-12-03 16:55:13.135968 Pushed LeftMouseButton  at 504 299
+2021-12-03 16:55:13.880154 Pushed LeftMouseButton  at 601 437
+2021-12-03 16:55:14.886816 Pushed LeftMouseButton  at 590 282
+2021-12-03 16:55:16.508226 Pushed LeftMouseButton  at 544 112
+2021-12-03 16:55:17.112377 Pushed LeftMouseButton  at 688 304
+2021-12-03 16:55:18.182644 Pushed LeftMouseButton  at 683 343
+2021-12-03 16:55:19.020131 Pushed LeftMouseButton  at 675 354
+2021-12-03 16:55:19.960469 Pushed Button Up arrow
+2021-12-03 16:55:20.531518 Released Button Up arrow
+2021-12-03 16:55:20.733677 Pushed Button Up arrow
+2021-12-03 16:55:20.866604 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:20.867702 Released Button Up arrow
+2021-12-03 16:55:20.968739 Pushed Button Up arrow
+2021-12-03 16:55:21.099658 Released Button Up arrow
+2021-12-03 16:55:21.133765 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:21.164675 Pushed Button Up arrow
+2021-12-03 16:55:21.263701 Released Button Up arrow
+2021-12-03 16:55:21.364725 Pushed Button Up arrow
+2021-12-03 16:55:21.444756 Released Button Up arrow
+2021-12-03 16:55:21.542772 Pushed Button Up arrow
+2021-12-03 16:55:21.546775 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:21.668802 Released Button Up arrow
+2021-12-03 16:55:21.731912 Pushed Button Up arrow
+2021-12-03 16:55:21.765827 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:21.869856 Released Button Up arrow
+2021-12-03 16:55:21.969879 Pushed Button Up arrow
+2021-12-03 16:55:22.006890 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:22.103912 Released Button Up arrow
+2021-12-03 16:55:23.016144 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:23.052157 Pushed Button Up arrow
+2021-12-03 16:55:23.153179 Released Button Up arrow
+2021-12-03 16:55:23.322221 Pushed Button Up arrow
+2021-12-03 16:55:23.324226 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:23.421342 Released Button Up arrow
+2021-12-03 16:55:23.519271 Pushed Button Up arrow
+2021-12-03 16:55:23.552378 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:23.653304 Released Button Up arrow
+2021-12-03 16:55:23.752330 Pushed Button Up arrow
+2021-12-03 16:55:23.787342 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:23.852356 Released Button Up arrow
+2021-12-03 16:55:23.955381 Pushed Button Up arrow
+2021-12-03 16:55:23.988497 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:24.090419 Released Button Up arrow
+2021-12-03 16:55:24.154530 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:24.156439 Pushed Button Up arrow
+2021-12-03 16:55:24.284468 Released Button Up arrow
+2021-12-03 16:55:24.386492 Pushed Button Up arrow
+2021-12-03 16:55:24.419499 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:24.520626 Released Button Up arrow
+2021-12-03 16:55:24.622564 Pushed Button Up arrow
+2021-12-03 16:55:24.687570 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:24.755587 Released Button Up arrow
+2021-12-03 16:55:24.886618 Pushed Button Up arrow
+2021-12-03 16:55:24.920626 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:25.024648 Released Button Up arrow
+2021-12-03 16:55:25.259709 Pushed Button Up arrow
+2021-12-03 16:55:25.261710 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:25.391773 Released Button Up arrow
+2021-12-03 16:55:25.524773 Pushed Button Up arrow
+2021-12-03 16:55:25.561785 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:25.622799 Released Button Up arrow
+2021-12-03 16:55:25.727827 Pushed Button Up arrow
+2021-12-03 16:55:25.760834 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:25.860859 Released Button Up arrow
+2021-12-03 16:55:25.960991 Pushed Button Up arrow
+2021-12-03 16:55:25.994894 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:26.066915 Released Button Up arrow
+2021-12-03 16:55:26.231953 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:26.369988 Pushed Button Up arrow
+2021-12-03 16:55:26.469014 Released Button Up arrow
+2021-12-03 16:55:26.537033 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:26.605119 Pushed Button Up arrow
+2021-12-03 16:55:26.707079 Released Button Up arrow
+2021-12-03 16:55:26.842104 Pushed Button Up arrow
+2021-12-03 16:55:26.844122 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:26.944132 Released Button Up arrow
+2021-12-03 16:55:27.148182 Pushed Button Up arrow
+2021-12-03 16:55:27.180192 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:27.281220 Released Button Up arrow
+2021-12-03 16:55:27.486269 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:27.487270 Pushed Button Up arrow
+2021-12-03 16:55:27.622309 Released Button Up arrow
+2021-12-03 16:55:27.820353 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:27.889376 Pushed Button Up arrow
+2021-12-03 16:55:28.022403 Released Button Up arrow
+2021-12-03 16:55:28.126426 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:28.157436 Pushed Button Up arrow
+2021-12-03 16:55:28.292467 Released Button Up arrow
+2021-12-03 16:55:28.391495 Pushed Button Up arrow
+2021-12-03 16:55:28.523621 Released Button Up arrow
+2021-12-03 16:55:28.623550 Pushed Button Up arrow
+2021-12-03 16:55:28.757586 Released Button Up arrow
+2021-12-03 16:55:28.859612 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:28.860616 Pushed Button Up arrow
+2021-12-03 16:55:28.993747 Released Button Up arrow
+2021-12-03 16:55:29.094672 Pushed Button Up arrow
+2021-12-03 16:55:29.123681 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:29.222712 Released Button Up arrow
+2021-12-03 16:55:29.323728 Pushed Button Up arrow
+2021-12-03 16:55:29.363740 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:29.427756 Released Button Up arrow
+2021-12-03 16:55:29.560787 Pushed Button Up arrow
+2021-12-03 16:55:29.594894 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:29.655813 Released Button Up arrow
+2021-12-03 16:55:29.792848 Pushed Button Up arrow
+2021-12-03 16:55:29.824855 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:29.893873 Released Button Up arrow
+2021-12-03 16:55:29.996899 Pushed Button Up arrow
+2021-12-03 16:55:30.067920 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:30.098924 Released Button Up arrow
+2021-12-03 16:55:30.196951 Pushed Button Up arrow
+2021-12-03 16:55:30.297977 Released Button Up arrow
+2021-12-03 16:55:30.401102 Pushed Button Up arrow
+2021-12-03 16:55:30.435009 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:30.502025 Released Button Up arrow
+2021-12-03 16:55:31.040162 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:31.077171 Pushed Button Up arrow
+2021-12-03 16:55:31.178295 Released Button Up arrow
+2021-12-03 16:55:31.643314 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:31.845367 Pushed Button Up arrow
+2021-12-03 16:55:31.980401 Released Button Up arrow
+2021-12-03 16:55:32.014411 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:32.077425 Pushed Button Up arrow
+2021-12-03 16:55:32.211552 Released Button Up arrow
+2021-12-03 16:55:32.278475 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:32.312484 Pushed Button Up arrow
+2021-12-03 16:55:32.809716 Released Button Up arrow
+2021-12-03 16:55:32.909637 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:32.942644 Pushed Button Up arrow
+2021-12-03 16:55:33.042670 Released Button Up arrow
+2021-12-03 16:55:33.144695 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:33.179705 Pushed Button Up arrow
+2021-12-03 16:55:33.279728 Released Button Up arrow
+2021-12-03 16:55:33.385758 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:33.387758 Pushed Button Up arrow
+2021-12-03 16:55:33.515890 Released Button Up arrow
+2021-12-03 16:55:33.648820 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:34.525139 Pushed Button Up arrow
+2021-12-03 16:55:34.527043 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:34.661174 Released Button Up arrow
+2021-12-03 16:55:34.795110 Pushed Button Up arrow
+2021-12-03 16:55:34.828121 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:34.931162 Released Button Up arrow
+2021-12-03 16:55:35.299236 Pushed Button Up arrow
+2021-12-03 16:55:35.301245 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:35.667051 Released Button Up arrow
+2021-12-03 16:55:35.937119 Pushed Button Up arrow
+2021-12-03 16:55:35.938119 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:36.040254 Released Button Up arrow
+2021-12-03 16:55:36.583842 Pushed Button Up arrow
+2021-12-03 16:55:36.610846 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:37.184992 Released Button Up arrow
+2021-12-03 16:55:37.357041 Pushed Button Up arrow
+2021-12-03 16:55:37.358039 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:37.459163 Released Button Up arrow
+2021-12-03 16:55:37.558087 Pushed Button Up arrow
+2021-12-03 16:55:37.691121 Released Button Up arrow
+2021-12-03 16:55:37.793245 Pushed Button Up arrow
+2021-12-03 16:55:37.827155 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:37.929182 Released Button Up arrow
+2021-12-03 16:55:38.065319 Pushed Button Up arrow
+2021-12-03 16:55:38.067241 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:38.200251 Released Button Up arrow
+2021-12-03 16:55:38.301278 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:38.570343 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:38.639377 Pushed Button Up arrow
+2021-12-03 16:55:38.739389 Released Button Up arrow
+2021-12-03 16:55:38.872526 Pushed Button Up arrow
+2021-12-03 16:55:38.874423 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:39.002452 Released Button Up arrow
+2021-12-03 16:55:39.104478 Pushed Button Up arrow
+2021-12-03 16:55:39.135486 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:39.238525 Released Button Up arrow
+2021-12-03 16:55:39.338537 Pushed Button Up arrow
+2021-12-03 16:55:39.404554 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:39.468570 Released Button Up arrow
+2021-12-03 16:55:39.578599 Pushed Button Up arrow
+2021-12-03 16:55:39.604605 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:39.671622 Released Button Up arrow
+2021-12-03 16:55:39.804657 Pushed Button Up arrow
+2021-12-03 16:55:39.837669 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:39.908843 Released Button Up arrow
+2021-12-03 16:55:40.038023 Pushed Button Up arrow
+2021-12-03 16:55:40.074044 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:40.176068 Released Button Up arrow
+2021-12-03 16:55:40.308120 Pushed Button Up arrow
+2021-12-03 16:55:40.310139 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:40.410151 Released Button Up arrow
+2021-12-03 16:55:40.545186 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:40.547187 Pushed Button Up arrow
+2021-12-03 16:55:40.646212 Released Button Up arrow
+2021-12-03 16:55:40.850295 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:41.120383 Pushed Button Up arrow
+2021-12-03 16:55:41.184406 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:41.252427 Released Button Up arrow
+2021-12-03 16:55:41.387471 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:41.389476 Pushed Button Up arrow
+2021-12-03 16:55:41.517517 Released Button Up arrow
+2021-12-03 16:55:41.618649 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:41.651759 Pushed Button Up arrow
+2021-12-03 16:55:41.785702 Released Button Up arrow
+2021-12-03 16:55:41.917845 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:41.987764 Pushed Button Up arrow
+2021-12-03 16:55:42.089814 Released Button Up arrow
+2021-12-03 16:55:42.193916 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:42.195917 Pushed Button Up arrow
+2021-12-03 16:55:42.328851 Released Button Up arrow
+2021-12-03 16:55:42.429880 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:42.430880 Pushed Button Up arrow
+2021-12-03 16:55:42.534001 Released Button Up arrow
+2021-12-03 16:55:42.665932 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:42.666937 Pushed Button Up arrow
+2021-12-03 16:55:42.768959 Released Button Up arrow
+2021-12-03 16:55:42.905045 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:42.907047 Pushed Button Up arrow
+2021-12-03 16:55:43.039080 Released Button Up arrow
+2021-12-03 16:55:43.174114 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:43.175115 Pushed Button Up arrow
+2021-12-03 16:55:43.277141 Released Button Up arrow
+2021-12-03 16:55:43.412171 Pushed Button Up arrow
+2021-12-03 16:55:43.413174 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:43.545206 Released Button Up arrow
+2021-12-03 16:55:43.679239 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:43.713347 Pushed Button Up arrow
+2021-12-03 16:55:43.816274 Released Button Up arrow
+2021-12-03 16:55:43.986321 Pushed Button Up arrow
+2021-12-03 16:55:44.052334 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:44.117422 Released Button Up arrow
+2021-12-03 16:55:44.389421 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:44.419531 Pushed Button Up arrow
+2021-12-03 16:55:44.553462 Released Button Up arrow
+2021-12-03 16:55:44.653487 Pushed Button Up arrow
+2021-12-03 16:55:44.687598 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:44.783522 Released Button Up arrow
+2021-12-03 16:55:44.918654 Pushed Button Up arrow
+2021-12-03 16:55:44.920557 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:45.017580 Released Button Up arrow
+2021-12-03 16:55:45.153614 Pushed Button Up arrow
+2021-12-03 16:55:45.156621 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:45.251641 Released Button Up arrow
+2021-12-03 16:55:45.391677 Pushed Button Up arrow
+2021-12-03 16:55:45.393677 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:45.484698 Released Button Up arrow
+2021-12-03 16:55:45.587733 Pushed Button Up arrow
+2021-12-03 16:55:45.616732 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:45.716756 Released Button Up arrow
+2021-12-03 16:55:45.815780 Pushed Button Up arrow
+2021-12-03 16:55:45.883904 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:45.917808 Released Button Up arrow
+2021-12-03 16:55:46.053840 Pushed Button Up arrow
+2021-12-03 16:55:46.089849 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:46.185971 Released Button Up arrow
+2021-12-03 16:55:46.322908 Pushed Button Up arrow
+2021-12-03 16:55:46.356915 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:46.459958 Released Button Up arrow
+2021-12-03 16:55:46.663991 Pushed Button Up arrow
+2021-12-03 16:55:46.664994 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:46.763016 Released Button Up arrow
+2021-12-03 16:55:46.933159 Pushed Button Up arrow
+2021-12-03 16:55:47.001076 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:47.071103 Released Button Up arrow
+2021-12-03 16:55:47.239141 Pushed Button Up arrow
+2021-12-03 16:55:47.240141 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:47.340169 Released Button Up arrow
+2021-12-03 16:55:47.507208 Pushed Button Up arrow
+2021-12-03 16:55:47.508205 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:47.641333 Released Button Up arrow
+2021-12-03 16:55:47.775268 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:47.777274 Pushed Button Up arrow
+2021-12-03 16:55:47.909397 Released Button Up arrow
+2021-12-03 16:55:48.046339 Pushed Button Up arrow
+2021-12-03 16:55:48.047337 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:48.142360 Released Button Up arrow
+2021-12-03 16:55:48.311508 Pushed Button Up arrow
+2021-12-03 16:55:48.384423 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:48.479444 Released Button Up arrow
+2021-12-03 16:55:48.611477 Pushed Button Up arrow
+2021-12-03 16:55:48.645485 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:48.745510 Released Button Up arrow
+2021-12-03 16:55:48.844533 Pushed Button Up arrow
+2021-12-03 16:55:48.878545 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:48.944556 Released Button Up arrow
+2021-12-03 16:55:49.115600 Pushed Button Up arrow
+2021-12-03 16:55:49.178616 Pushed LeftMouseButton  at 675 320
+2021-12-03 16:55:49.242632 Released Button Up arrow
+2021-12-03 16:55:53.046596 Pushed Button Up arrow
+2021-12-03 16:55:53.247744 Released Button Up arrow
+2021-12-03 16:55:54.050848 Pushed Button Up arrow
+2021-12-03 16:55:54.355929 Released Button Up arrow
+2021-12-03 16:55:54.997087 Pushed Button Up arrow
+2021-12-03 16:55:55.500211 Released Button Up arrow
+2021-12-03 16:55:56.103737 Pushed Button Up arrow
+2021-12-03 16:55:56.341798 Released Button Up arrow
+2021-12-03 16:55:56.778012 Pushed LeftMouseButton  at 781 168
+2021-12-03 16:55:56.946008 Pushed LeftMouseButton  at 781 168
+2021-12-03 16:55:57.152000 Pushed Button Up arrow
+2021-12-03 16:55:57.154001 Pushed LeftMouseButton  at 781 168
+2021-12-03 16:55:57.320040 Released Button Up arrow
+2021-12-03 16:55:57.357053 Pushed LeftMouseButton  at 781 168
+2021-12-03 16:55:57.760150 Pushed Button Up arrow
+2021-12-03 16:55:57.829169 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:55:57.931193 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:55:58.096234 Released Button Up arrow
+2021-12-03 16:55:58.131261 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:55:58.198355 Pushed Button Up arrow
+2021-12-03 16:55:58.300286 Released Button Up arrow
+2021-12-03 16:55:58.333293 Pushed Button Up arrow
+2021-12-03 16:55:58.368302 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:55:58.535343 Released Button Up arrow
+2021-12-03 16:55:58.606365 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:55:58.769404 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:55:58.940520 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:55:59.106782 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:55:59.308008 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:55:59.512060 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:55:59.685106 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:56:00.118309 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:56:00.285256 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:56:00.927418 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:56:01.094457 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:56:01.529567 Pushed LeftMouseButton  at 781 169
+2021-12-03 16:56:01.698610 Pushed LeftMouseButton  at 781 169

@@ -1,7 +1,8 @@
 import math
-from random import choice, randrange
+import datetime
 import pygame
-from Colors import game_colors, white, red, black, DARKKHAKI, OLIVE, SKYBLUE
+from random import choice, randrange
+from Colors import game_colors, white, red, black, DARKKHAKI, OLIVE, SKYBLUE, GRAY, WHITE
 from random import randint
 from GraphComs import turn, distance
 
@@ -417,6 +418,13 @@ class Plane(Gun):
 
 
 class GameMaster:
+    score = 0
+    highscore = -1
+    username = 'admin'
+    logged = False
+    database_path = 'database.txt'
+    data_path = 'data.txt'
+
     def __init__(self, screen):
         """
         Constructor of class GameMaster
@@ -433,6 +441,9 @@ class GameMaster:
         self.armor = Gun(screen, self)
         self.targets = [Target(screen, self), MovingTarget(screen, self)]
         self.level = 1
+
+        self.logger = EventLogger()
+        self.login()
 
         # finishing game marker
         self.finished = False
@@ -470,35 +481,53 @@ class GameMaster:
         Checks events and changes objects' acceleration etc.
         """
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.finished = True
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                self.armor.fire2_start()
-            elif event.type == pygame.MOUSEBUTTONUP:
-                self.armor.fire2_end(event)
-            elif event.type == pygame.MOUSEMOTION:
-                self.armor.aiming(event)
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    if type(self.armor) == Tank:
-                        self.armor.acceleration_x = -0.3
+            self.logger.get_event(event)
 
-                elif event.key == pygame.K_RIGHT:
-                    if type(self.armor) == Tank:
-                        self.armor.acceleration_x = 0.5
-                elif event.key == pygame.K_UP:
-                    if type(self.armor) == Plane:
-                        self.armor.acceleration_y -= 2.3
-            elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT:
-                    if type(self.armor) in [Tank]:
-                        self.armor.acceleration_xx = 0
-                elif event.key == pygame.K_RIGHT:
-                    if type(self.armor) in [Tank]:
-                        self.armor.acceleration_x = 0
-                elif event.key == pygame.K_UP:
-                    if type(self.armor) == Plane:
-                        self.armor.acceleration_y += 2.3
+            if self.logged:
+                if event.type == pygame.QUIT:
+                    self.finished = True
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    self.armor.fire2_start()
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    self.armor.fire2_end(event)
+                elif event.type == pygame.MOUSEMOTION:
+                    self.armor.aiming(event)
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        if type(self.armor) == Tank:
+                            self.armor.acceleration_x = -0.3
+
+                    elif event.key == pygame.K_RIGHT:
+                        if type(self.armor) == Tank:
+                            self.armor.acceleration_x = 0.5
+                    elif event.key == pygame.K_UP:
+                        if type(self.armor) == Plane:
+                            self.armor.acceleration_y -= 2.3
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT:
+                        if type(self.armor) in [Tank]:
+                            self.armor.acceleration_xx = 0
+                    elif event.key == pygame.K_RIGHT:
+                        if type(self.armor) in [Tank]:
+                            self.armor.acceleration_x = 0
+                    elif event.key == pygame.K_UP:
+                        if type(self.armor) == Plane:
+                            self.armor.acceleration_y += 2.3
+            else:  # mode of changing the username
+                if event.type == pygame.QUIT:
+                    exit()  # Quits
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_BACKSPACE:  # deletes last symbol
+                        self.username = self.username[:-1]
+                    elif event.key == 13:  # Enter button, to go to game mode
+                        self.logged = True
+                        self.logger.write_event('User logged as ' + self.username)
+
+                    elif 97 <= event.key <= 122:  # typing a letter
+                        letters = 'abcdefghijklmnopqrstuvwxyz'
+                        self.username += letters[event.key - 97]
+                    elif 48 <= event.key <= 57:  # typing a digit
+                        self.username += str(event.key - 48)
 
     def draw(self):
         """
@@ -533,3 +562,135 @@ class GameMaster:
         self.screen.blit(percent_text, (10, 50))
 
         pygame.display.update()
+
+    def login(self):
+        """
+        Takes user's nickname which he types by keyboard
+        """
+
+        while not self.logged:  # waiting for typing the nickname
+            self.screen.fill(GRAY())
+
+            log_text = pygame.font.Font(None, 72).render('Enter your name: '
+                                                         + self.username,
+                                                         True, WHITE())
+            self.screen.blit(log_text, (10, 10))
+
+            self.events()  # catches application's events
+
+            pygame.display.update()
+
+    def write_stats(self):
+        """
+        Updates users' statistics
+        """
+        is_new = True
+
+        with open(self.database_path, 'r') as f:  # reading old statistics
+            loaded = [i.split() for i in f.read().splitlines()]
+
+        for i in range(len(loaded)):  # adding new data
+            if loaded[i][0] == self.username and i != 0:
+                loaded[i][1] = str(max(int(loaded[i][1]), int(self.highscore)))
+                is_new = False
+                break
+
+        if is_new:  # if user is new, adding him
+            loaded.append([self.username, str(int(self.highscore))])
+
+        with open(self.database_path, 'w') as f:  # loading statistics to the file
+            for i in loaded:
+                for j in i:
+                    f.write(j + ' ')
+                f.write('\n')
+
+
+class EventLogger:
+    """
+    Class that catches all events and write it to a file
+    logger_path -- path to a file, where events are written
+    """
+    logger_path = 'events.txt'
+
+    def __init__(self):
+        """
+        Initialization of the logger
+        """
+        self.write_event('EventLogger initialized')
+
+    def write_event(self, text):
+        """
+        Basic event-write command, write time of the event and it's name
+        text -- name of the event
+        """
+        date_now = str(datetime.datetime.now())
+
+        with open(self.logger_path, 'a') as f:
+            f.write(date_now + ' ' + text + '\n')
+
+    def game_event(self, text):
+        """
+        Writes event bounded with the game
+        text -- name of the event
+        """
+        self.write_event('Game ' + text)
+
+    def button_event(self, text, typ):
+        """
+        Writes event bounded with buttons
+        text -- name of the event
+        typ -- 'ButtonDown' or 'ButtonUp', depends on what was done with button
+        """
+        if typ == 'ButtonDown':
+            self.write_event('Pushed Button ' + text)
+        elif typ == 'ButtonUp':
+            self.write_event('Released Button ' + text)
+
+    def mouse_event(self, text, button='Left'):
+        """
+        Writes mouse click event
+        text -- name of the event
+        button -- 'Left' or 'Right' button of the mouse
+        """
+        self.write_event('Pushed ' + button + 'MouseButton ' + text)
+
+    def get_event(self, event):
+        """
+        Works with pygame events
+        """
+        typ = 'None'
+
+        if event.type == pygame.QUIT:
+            self.game_event('ended')
+        elif event.type == pygame.KEYDOWN:
+            typ = 'ButtonDown'
+        elif event.type == pygame.KEYUP:
+            typ = 'ButtonUp'
+
+        if event.type in [pygame.KEYDOWN, pygame.KEYUP]:
+            if event.key == pygame.K_SPACE:
+                self.button_event('Space', typ)
+            elif event.key == pygame.K_UP:
+                self.button_event('Up arrow', typ)
+            elif event.key == pygame.K_DOWN:
+                self.button_event('Down arrow', typ)
+            elif event.key == pygame.K_LEFT:
+                self.button_event('Left arrow', typ)
+            elif event.key == pygame.K_RIGHT:
+                self.button_event('Right arrow', typ)
+            elif event.key == pygame.K_BACKSPACE:
+                self.button_event('BACKSPACE', typ)
+            elif event.key == 13:
+                self.button_event('ENTER', typ)
+
+            elif 97 <= event.key <= 122:
+                letters = 'abcdefghijklmnopqrstuvwxyz'
+                self.button_event(letters[event.key - 97], typ)
+            elif 48 <= event.key <= 57:
+                self.button_event(str(event.key - 48), typ)
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                position = event.pos
+                self.mouse_event(' at ' + str(position[0])
+                                 + ' ' + str(position[1]))
